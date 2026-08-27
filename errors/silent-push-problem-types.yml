@@ -1,0 +1,79 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  live unauthenticated requests to api.silentpush.com (2026-08-27) plus the
+  documented 400 response schema at
+  https://help.silentpush.com/apidocs/perform-a-live-scan
+format: vendor
+format_note: >-
+  NOT RFC 9457. Silent Push does not use application/problem+json. Errors are
+  returned as application/json with a Django REST Framework style envelope
+  carrying an errors array.
+
+envelope:
+  content_type: application/json
+  shape: '{"errors": [{"message": "<human readable>", "code": "<machine slug>"}]}'
+  array_field: errors
+  message_field: message
+  code_field: code
+  evidence: >-
+    documented on the Live Scan reference page (400: "object errors Array of
+    object > message string, code string") and confirmed verbatim on three live
+    unauthenticated responses.
+
+problems:
+- status: 401
+  code: not_authenticated
+  title: Authentication credentials were not provided
+  remediation: >-
+    Send the organization API key in the x-api-key request header. Generate one
+    at user icon > Organization > API Keys.
+  observed_at: 'GET /api/v2/live-scan/scan-on-demand/query/'
+  observed_body: '{"errors":[{"message":"Authentication credentials were not provided.","code":"not_authenticated"}]}'
+  method: probed
+- status: 403
+  code: permission_denied
+  title: You do not have permission to perform this action
+  remediation: >-
+    The key is present but the calling organization is not entitled to this
+    endpoint or dataset. Silent Push permissions data-source access at the
+    organization level.
+  observed_at: 'GET /api/v1/merge-api/explore/domain/domaininfo/{domain}'
+  observed_body: '{"errors":[{"message":"You do not have permission to perform this action.","code":"permission_denied"}]}'
+  method: probed
+  note: >-
+    403 is also returned for unknown paths under /api/v1/merge-api/ - the
+    permission check runs before routing, so a typo in a path surfaces as
+    permission_denied rather than 404. Agents must not read 403 here as proof
+    the endpoint exists.
+- status: 400
+  code: null
+  title: Request failed
+  remediation: Check required query parameters for the operation.
+  source: https://help.silentpush.com/apidocs/perform-a-live-scan
+  method: searched
+  note: >-
+    The published reference documents a 400 with the same errors[] envelope but
+    does not enumerate the code values it can carry.
+
+not_enumerated:
+  status: true
+  note: >-
+    Silent Push publishes no error-code registry. Only the two codes above were
+    observable without credentials, and the one documented reference page lists
+    a 400 without codes. A full catalog requires the auth-gated OpenAPI at
+    https://api.silentpush.com/api/schema/ (401) or the login-gated interactive
+    docs at https://api.silentpush.com/api/docs/ (302 to login).
+
+x-evidence:
+- url: https://api.silentpush.com/api/v2/live-scan/scan-on-demand/query/?url=https://example.com
+  http_status: 401
+  content_type: application/json
+  fetched: '2026-08-27'
+- url: https://api.silentpush.com/api/v1/merge-api/explore/domain/domaininfo/silentpush.com
+  http_status: 403
+  content_type: application/json
+  fetched: '2026-08-27'
+- url: https://help.silentpush.com/apidocs/perform-a-live-scan
+  http_status: 200
+  fetched: '2026-08-27'

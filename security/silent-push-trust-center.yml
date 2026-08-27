@@ -1,0 +1,32 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  direct probes of trust.silentpush.com, www.silentpush.com/trust/,
+  www.silentpush.com/security/, www.silentpush.com/legal/, plus keyword scans of
+  the terms of use and privacy policy
+trust_center:
+  published: false
+certifications: []
+compliance_programs: []
+note: >-
+  No trust center exists. trust.silentpush.com does not resolve;
+  www.silentpush.com/trust/, /security/ and /legal/ all return 404. Scanning the
+  published Terms of Use and Privacy Policy for SOC 2, ISO 27001, PCI DSS,
+  HIPAA, FedRAMP, GDPR and CCPA returned no match, so no compliance posture is
+  publicly claimed and NO Compliance pointer is emitted. Silent Push does
+  publish a vulnerability disclosure policy - see
+  security/silent-push-vulnerability-disclosure.yml.
+x-evidence:
+- url: https://trust.silentpush.com/
+  http_status: '<no response - DNS did not resolve>'
+  fetched: '2026-08-27'
+- url: https://www.silentpush.com/trust/
+  http_status: 404
+  fetched: '2026-08-27'
+- url: https://www.silentpush.com/security/
+  http_status: 404
+  fetched: '2026-08-27'
+- url: https://www.silentpush.com/terms-of-use/
+  http_status: 200
+  fetched: '2026-08-27'
+  finding: no certification keyword present

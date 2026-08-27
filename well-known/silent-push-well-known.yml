@@ -1,0 +1,84 @@
+generated: '2026-08-27'
+method: probed
+source: direct HTTP probes of every Silent Push host, 2026-08-27
+note: >-
+  One real document was served: mcp.silentpush.com publishes RFC 8414 OAuth 2.0
+  Authorization Server Metadata for its hosted MCP server. Every other
+  /.well-known/ path 404s. api.silentpush.com 301-redirects the whole
+  /.well-known/ namespace to the help site, and help.silentpush.com,
+  app.silentpush.com and explore.silentpush.com are SPA/knowledge-base hosts
+  whose 200 responses are HTML shells, not documents - those are recorded as
+  misses, not hits.
+hit_count: 1
+hosts:
+  - host: https://mcp.silentpush.com
+    documents:
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: silent-push-oauth-authorization-server.json
+        content_type: application/json
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/security.txt
+        status: 404
+  - host: https://api.silentpush.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 301
+        note: redirects to https://docs.silentpush.com/ - no document served
+      - path: /.well-known/api-catalog
+        status: 301
+        note: redirects to https://docs.silentpush.com/ - no document served
+      - path: /.well-known/openid-configuration
+        status: 301
+        note: redirects to https://docs.silentpush.com/ - no document served
+  - host: https://www.silentpush.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+  - host: https://help.silentpush.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+  - host: https://app.silentpush.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        note: >-
+          soft hit - SPA catch-all returns the same 730-byte HTML shell for every
+          path on this host. NOT a document; nothing saved.
+      - path: /.well-known/api-catalog
+        status: 200
+        note: same 730-byte SPA shell - not a document
+  - host: https://explore.silentpush.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        note: same 730-byte SPA shell as app.silentpush.com - not a document
+soft_404_control:
+  host: https://app.silentpush.com
+  path: /.well-known/this-path-does-not-exist
+  observed: every path returns HTTP 200 with an identical 730-byte HTML shell
+security_txt:
+  served: false
+  note: >-
+    Silent Push publishes a vulnerability disclosure policy as an HTML page at
+    https://www.silentpush.com/responsible-disclosure/ but does not serve an
+    RFC 9116 security.txt on any host. See
+    security/silent-push-vulnerability-disclosure.yml.

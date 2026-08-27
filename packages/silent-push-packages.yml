@@ -1,0 +1,114 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://github.com/Silent-Push (first-party GitHub organization),
+  registry.npmjs.org, pypi.org/pypi/*/json - all queried 2026-08-27
+note: >-
+  Silent Push ships NO first-party client SDK to any public package registry.
+  npm, PyPI, RubyGems, crates.io, NuGet, Maven Central and pkg.go.dev were all
+  queried and carry nothing published by Silent Push. The only first-party code
+  distribution is the Python CLI on GitHub, and its own documented download host
+  (labs.silentpush.com) no longer resolves - see the currency note on that entry.
+  The one PyPI package named "silentpush" is a third-party community wrapper and
+  is marked official:false.
+
+official_sdk_count: 1
+registry_published_official_count: 0
+
+packages:
+  - language: python
+    registry: github
+    name: SP---CLI
+    display_name: Silent Push Command Line Interface
+    url: https://github.com/Silent-Push/SP---CLI
+    install: 'python3 -m pip install SilentPushCLI-0.0.1-py3-none-linux.whl'
+    install_source: https://labs.silentpush.com/jorgeley/
+    official: true
+    version: 0.0.1
+    published: '2024-11-06'
+    published_basis: >-
+      last push to the default branch (GitHub API pushed_at). The project has no
+      tags or releases and is not on PyPI, so no registry metadata endpoint
+      exists to query.
+    currency_note: >-
+      DECAY SIGNAL. The README's only documented install path is a wheel
+      downloaded from https://labs.silentpush.com/jorgeley/ - that host did not
+      resolve when probed on 2026-08-27 (curl exit 6, no DNS answer), so the
+      published install instruction cannot be followed. The repository has not
+      been pushed since 2024-11-06, and its command surface (score, enrich,
+      bulk_enrich, padns) predates the Insight/Defend/Reconnaissance platform
+      restructure shipped in Release 6.0 (2026-06-12) and the SPQL API rewrite in
+      Release 4.11 (2025-11-17).
+    provides: [cli, python-library]
+
+  - language: python
+    registry: pypi
+    name: silentpush
+    url: https://pypi.org/project/silentpush/
+    install: pip install silentpush
+    official: false
+    official_basis: >-
+      published by Garrett Marking (github.com/gmarking/SilentPush-py), not by
+      Silent Push. Not linked from any Silent Push documentation page.
+    version: 0.0.3
+    published: '2024-03-14'
+    summary: Python Library to interact with SilentPush Explore API
+    currency_note: >-
+      All three releases (0.0.1, 0.0.2, 0.0.3) were uploaded on the same day,
+      2024-03-14, and nothing has shipped since.
+
+integrations:
+  - name: Silent Push Polarity Integration
+    url: https://github.com/Silent-Push/silentpush-polarity-integration
+    official: true
+    kind: platform-integration
+    version: null
+    published: '2023-09-15'
+    published_basis: GitHub pushed_at; no tags or releases
+    note: >-
+      Not a client SDK - a Polarity platform integration. Recorded here for
+      completeness; not counted toward official_sdk_count.
+  - name: Google SecOps (Chronicle) Content Hub
+    url: https://github.com/Silent-Push/content-hub
+    official: true
+    kind: platform-integration
+    version: null
+    published: '2026-02-17'
+    published_basis: GitHub pushed_at; no tags or releases
+  - name: Silent Push API Overview (Jupyter notebooks)
+    url: https://github.com/Silent-Push/API-Overview-Jupyter-Notebook
+    official: true
+    kind: examples
+    version: null
+    published: '2026-04-03'
+    published_basis: GitHub pushed_at; no tags or releases
+    note: >-
+      Three notebooks (v1, v2, v3) demonstrating top Silent Push API
+      integrations. The most current first-party API usage examples published
+      outside the login wall.
+  - name: Silent Push Web Scanner Postman Collection
+    url: https://github.com/Silent-Push/Web-Scanner-Postman-Collection
+    official: true
+    kind: postman-collection
+    version: null
+    published: '2024-09-26'
+    published_basis: GitHub pushed_at; no tags or releases
+    saved_to: postman/silent-push-web-scanner.postman_collection.json
+
+registries_checked:
+  - registry: npm
+    queried: ['silentpush', '@silentpush/mcp', '@silentpush/sdk', 'silentpush-mcp']
+    result: none published
+  - registry: pypi
+    queried: ['silentpush', 'silent-push', 'silentpush-cli', 'sp-cli', 'silentpush-mcp']
+    result: only the third-party "silentpush" package exists
+  - registry: rubygems
+    result: none published
+  - registry: crates.io
+    result: none published
+  - registry: nuget
+    result: none published
+  - registry: maven-central
+    result: none published
+  - registry: pkg.go.dev
+    result: none published

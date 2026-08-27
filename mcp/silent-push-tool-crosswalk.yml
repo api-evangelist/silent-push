@@ -1,0 +1,319 @@
+generated: '2026-08-27'
+method: derived
+source: >-
+  mcp/silent-push-mcp.yml (provider-published tool list) bound against the REST
+  endpoints Silent Push documents publicly at
+  https://help.silentpush.com/docs/silent-push-api-highlights,
+  https://help.silentpush.com/docs/api and
+  https://help.silentpush.com/apidocs/perform-a-live-scan
+note: >-
+  IMPORTANT PROVENANCE CAVEAT. The normal crosswalk binds each MCP tool to an
+  OpenAPI operationId. Silent Push's OpenAPI is auth-gated - GET
+  https://api.silentpush.com/api/schema/ returns 401 with content-type
+  application/vnd.oai.openapi - so no operationIds are available and none have
+  been invented. Rows below bind tools to the documented REST PATH instead, and
+  confidence is set on how explicitly the docs tie the two together. MCP input
+  schemas are likewise not introspected (tools/list is 401), so no tool here
+  inherits a verified parameter contract.
+
+surfaces:
+  openapi:
+    status: gated
+    url: https://api.silentpush.com/api/schema/
+    http_status: 401
+    content_type: application/vnd.oai.openapi
+    interactive_docs: https://api.silentpush.com/api/docs/
+    interactive_docs_status: 302 (redirects to login)
+    note: >-
+      The schema endpoint exists and is served by drf-spectacular, but requires
+      an authenticated Silent Push session. Nothing was saved to openapi/.
+  rest_base: https://api.silentpush.com/api/v1/merge-api/
+  rest_auth: 'x-api-key header'
+  graphql:
+    status: none
+    note: no GraphQL surface found on any Silent Push host
+  mcp:
+    url: https://mcp.silentpush.com/mcp
+    status: gated
+    http_status: 401
+    note: tools/list requires an OAuth bearer token
+  postman:
+    url: postman/silent-push-web-scanner.postman_collection.json
+    note: >-
+      First-party public Postman collection covering POST
+      /api/v2/web-scan/query/ - the only fully worked request/response examples
+      Silent Push publishes outside the login wall.
+
+crosswalk:
+  - tool: get_domain_whois
+    category: reputation
+    rest: ['GET /api/v1/merge-api/explore/domain/whois']
+    binding: rest
+    confidence: high
+    note: docs name this endpoint as the WHOIS retrieval API by the same semantics
+  - tool: live_scan
+    category: scanning
+    rest: ['GET /api/v2/live-scan/scan-on-demand/query/']
+    binding: rest
+    confidence: high
+    note: >-
+      the only Silent Push operation with a public reference page
+      (help.silentpush.com/apidocs/perform-a-live-scan) - query params url,
+      region, platform, proxy; auth x-api-key
+  - tool: screenshot_url
+    category: scanning
+    rest: ['GET /api/v1/merge-api/explore/tools/screenshotondemand']
+    binding: rest
+    confidence: high
+    note: documented as "screenshot-on-demand" in the API Feature Overview table
+  - tool: query_spql
+    category: spql
+    rest: ['GET /api/v1/merge-api/explore/scandata/search/raw']
+    binding: rest
+    confidence: high
+    note: docs describe this as the SPQL multi-dataset query endpoint
+  - tool: query_forward
+    category: padns
+    rest: ['GET /api/v1/merge-api/explore/padns/lookup/query/{record_type}']
+    binding: rest
+    confidence: high
+    note: >-
+      PADNS "query" direction; record types enumerated by the first-party CLI
+      (a, aaaa, cname, mx, ns, ptr4, ptr6, soa, txt, any, anyipv4, anyipv6)
+  - tool: query_backward
+    category: padns
+    rest: ['GET /api/v1/merge-api/explore/padns/lookup/answer/{record_type}']
+    binding: rest
+    confidence: medium
+    note: >-
+      maps to the PADNS "answer" direction exposed by the first-party CLI's
+      `padns answer` command tree; the docs do not name the tool/endpoint pair
+      explicitly
+  - tool: query_reverse
+    category: padns
+    rest: ['GET /api/v1/merge-api/explore/padns/lookup/answer/{record_type}']
+    binding: rest
+    confidence: low
+    note: >-
+      reverse lookup is documented as a PADNS capability but no distinct path is
+      published; may be the same answer-direction endpoint with different
+      parameters
+  - tool: enrich_domain
+    category: enrichment
+    rest: ['GET /api/v1/merge-api/explore/domain/domaininfo/{domain}']
+    binding: rest
+    confidence: medium
+    note: >-
+      the Get Started guide uses explore/domain/domaininfo/{domain} as its
+      worked enrichment example; the docs also describe an "Enrich" API section
+      with single and bulk domain endpoints
+  - tool: enrich_ip
+    category: enrichment
+    rest: []
+    binding: unmapped
+    confidence: low
+    note: >-
+      docs describe single IPv4/IPv6 enrichment under the "Enrich" section but
+      publish no path outside the login wall
+  - tool: bulk_enrich_domains
+    category: enrichment
+    rest: []
+    binding: unmapped
+    confidence: low
+    note: '"Enrich" section documents bulk domain enrichment; no public path'
+  - tool: bulk_enrich_ips
+    category: enrichment
+    rest: []
+    binding: unmapped
+    confidence: low
+    note: '"Enrich" section documents bulk IPv4/IPv6 enrichment; no public path'
+  - tool: get_risk_score
+    category: enrichment
+    rest: []
+    binding: unmapped
+    confidence: low
+    note: >-
+      the first-party CLI exposes `sp score <domain>`, so a risk-score endpoint
+      exists; its path is not published
+  - tool: find_by_favicon
+    category: spql
+    rest: ['POST /api/v2/web-scan/query/']
+    binding: rest
+    confidence: medium
+    note: >-
+      the public Postman collection queries favicon hashes (favicon2_murmur3)
+      through POST /api/v2/web-scan/query/
+  - tool: find_by_ssl_certificate
+    category: spql
+    rest: ['POST /api/v2/web-scan/query/']
+    binding: rest
+    confidence: medium
+    note: >-
+      the Postman collection includes an SSL-certificate-expiry query against
+      the same endpoint
+  - tool: find_by_jarm
+    category: spql
+    rest: ['POST /api/v2/web-scan/query/']
+    binding: rest
+    confidence: medium
+    note: jarm is a documented field of the live-scan / web-scan response schema
+  - tool: find_by_html_pattern
+    category: spql
+    rest: ['POST /api/v2/web-scan/query/']
+    binding: rest
+    confidence: medium
+    note: >-
+      body_analysis / htmltitle / html_body_* fields are documented on the
+      web-scan response schema
+  - tool: find_by_banner
+    category: spql
+    rest: ['POST /api/v2/web-scan/query/']
+    binding: rest
+    confidence: low
+    note: banner search is named in the MCP docs; no banner field published
+  - tool: search_by_asn
+    category: spql
+    rest: ['POST /api/v2/web-scan/query/']
+    binding: rest
+    confidence: medium
+    note: >-
+      asn_information is a documented block of the web-scan response; the
+      Postman collection filters on CDN/host attributes the same way
+  - tool: search_domains
+    category: padns
+    rest: []
+    binding: unmapped
+    confidence: low
+  - tool: get_asn_reputation
+    category: reputation
+    rest: []
+    binding: unmapped
+    confidence: low
+    note: reputation is a documented data type; no public per-object path
+  - tool: get_subnet_reputation
+    category: reputation
+    rest: []
+    binding: unmapped
+    confidence: low
+  - tool: get_nameserver_reputation
+    category: reputation
+    rest: []
+    binding: unmapped
+    confidence: low
+  - tool: get_ip_reputation
+    category: reputation
+    rest: []
+    binding: unmapped
+    confidence: low
+  - tool: find_sibling_domains
+    category: padns
+    rest: []
+    binding: unmapped
+    confidence: low
+  - tool: find_cousin_domains
+    category: padns
+    rest: []
+    binding: unmapped
+    confidence: low
+    note: >-
+      corresponds to the documented "Explore Recipes" impersonation surface
+      (/api/v1/explore-recipes/...), but the recipe name is not published
+  - tool: find_self_hosted
+    category: padns
+    rest: []
+    binding: unmapped
+    confidence: low
+  - tool: get_density
+    category: padns
+    rest: []
+    binding: unmapped
+    confidence: low
+  - tool: get_diversity
+    category: padns
+    rest: []
+    binding: unmapped
+    confidence: low
+    note: docs name "IP diversity analysis" as an Enrich-section endpoint
+  - tool: get_host_diversity
+    category: padns
+    rest: []
+    binding: unmapped
+    confidence: low
+  - tool: get_nameserver_domains
+    category: padns
+    rest: []
+    binding: unmapped
+    confidence: low
+  - tool: get_asns_for_domain
+    category: padns
+    rest: []
+    binding: unmapped
+    confidence: low
+  - tool: namechain_search
+    category: padns
+    rest: []
+    binding: unmapped
+    confidence: low
+  - tool: lookup_both
+    category: padns
+    rest: []
+    binding: unmapped
+    confidence: low
+
+mcp_only: []
+
+rest_only:
+  - capability: Threat Check
+    paths: ['/v1/docs/threat-check-api (documented; path behind login)']
+    note: >-
+      IOFA presence check via API or DNS-based lookup, with organization-scoped
+      access keys. No MCP tool exposes it.
+  - capability: Feeds CRUD
+    paths: []
+    note: >-
+      docs list full CRUD for custom threat intelligence feeds. The MCP tool set
+      is entirely read-only - no feed create/update/delete tool exists.
+  - capability: Feed Indicators
+    paths: []
+    note: add/update/delete/tag and bulk indicator operations. No MCP tool.
+  - capability: Feed Tags
+    paths: []
+    note: tag management for feed indicators. No MCP tool.
+  - capability: Export
+    paths: []
+    note: >-
+      download generated exports as CSV, JSON, TXT, RPZ or STIX. No MCP tool.
+  - capability: TLP Reports
+    paths: []
+    note: browse and retrieve TLP threat intelligence reports. No MCP tool.
+  - capability: Users & Quota
+    paths: []
+    note: user profile, organization quota, current API usage. No MCP tool.
+  - capability: Traffic Origin
+    paths: []
+    note: geolocation enrichment for sessions. No MCP tool.
+  - capability: Threat Ranking
+    paths: ['GET /api/v2/iocs/threat-ranking/']
+    note: >-
+      documented in the API Feature Overview and driven by the in-app "Automate
+      Export" code-snippet generator. No MCP tool.
+  - capability: Explore Recipes
+    paths: ['GET /api/v1/explore-recipes/domain-on-a-server-recipes/query/']
+    note: >-
+      documented recipe endpoint used for brand-impersonation detection. No
+      directly named MCP tool.
+
+coverage:
+  tools_named: 33
+  tools_bound_to_a_documented_path: 17
+  tools_unmapped: 16
+  mcp_only: 0
+  rest_capability_areas_total: 11
+  rest_capability_areas_with_a_tool: 3
+  rest_capability_areas_without_a_tool: 8
+  operationids_available: false
+  mcp_input_schemas_available: false
+  headline: >-
+    Silent Push's MCP surface is read-only intelligence. Every write capability
+    the REST API documents - feeds, indicators, tags, exports - has no MCP tool
+    at all, so an agent can investigate through MCP but cannot change anything.

@@ -1,0 +1,107 @@
+generated: '2026-08-27'
+method: searched
+source: https://help.silentpush.com/docs/2026
+note: >-
+  Silent Push publishes dated platform release notes in the knowledge base,
+  grouped by year (2026, 2025). These are product release notes, not an API
+  changelog - they describe features and module renames, and only occasionally
+  name an API change. No per-endpoint changelog exists.
+scheme: platform-release
+scheme_note: 'major.minor platform releases (4.9, 4.10, 4.11, 5.0, 5.1, 6.0)'
+current_version: '6.0'
+current_version_date: '2026-06-12'
+cadence: 'roughly every 2-4 months'
+index_url: https://help.silentpush.com/docs/2026
+covers_api_changes: partial
+window: recent (2025-07 through 2026-06)
+
+entries:
+- version: '6.0'
+  date: '2026-06-12'
+  url: https://help.silentpush.com/docs/release-6-0
+  breaking: unknown
+  breaking_note: >-
+    The platform was restructured around new top-level modules and Web Search
+    was renamed Context Graph Search. The notes do not say whether any API path
+    changed.
+  additions:
+  - MCP Server (Beta) - SaaS-hosted Model Context Protocol endpoint for Claude, Cursor and other MCP clients
+  - Traffic Origin - new Advanced Attribution module revealing true location behind VPNs, proxies, Tor and staging
+  - PADNS added as a Context Graph Search data source
+  - Email and phone number search in the Insight search bar
+  - Chrome Extension v1.8
+  highlights: >-
+    Platform reorganised into Insight, Defend, Reconnaissance and Advanced
+    Attribution; dark/light mode; search consolidated into the Advanced Query
+    Builder.
+- version: '5.1'
+  date: '2026-03-26'
+  url: https://help.silentpush.com/docs/release-51
+  breaking: false
+  additions:
+  - Reworked landing page with per-tier quick actions
+  - Domain Search fully integrated into SPQL
+  - Unified search and saved queries
+  - Notification-center-powered updates feed
+  highlights: >-
+    First release note to name the Enterprise / Professional / Community tiers
+    together.
+- version: '5.0'
+  date: '2026-02-11'
+  url: https://help.silentpush.com/docs/release-50
+  breaking: unknown
+  breaking_note: 'Threat Intelligence Management section renamed to Defend'
+  additions:
+  - Multi-source Threat Check, starting with Traffic Origin data
+  - Dedicated Threat Check page with self-service access keys and data-source configuration
+  highlights: >-
+    Threat Check gained organization-specific access keys and unlimited
+    indicator verification via API or DNS-based lookup.
+- version: '4.11'
+  date: '2025-11-17'
+  url: https://help.silentpush.com/docs/release-411-november-2025
+  breaking: unknown
+  breaking_note: >-
+    "The deployment of an updated version of the Silent Push Query Language
+    (SPQL) API" - a new API version is announced without a migration note or a
+    deprecation date for the previous one.
+  additions:
+  - Updated SPQL API with enhanced asynchronous processing for long-running queries
+  - Streamlined save/monitor/export into a single view; editable monitors
+  - Per-monitor notification customization (in-app, email, Slack, Teams)
+  - Splunk 3.0 integration with ThreatCheck support and bidirectional feed management
+  - D3 integration
+  - Chrome Extension 1.0.7
+  - Absolute and relative date filtering on Feed Search, Web Search and WHOIS Search
+- version: '4.10'
+  date: '2025-09-03'
+  url: https://help.silentpush.com/docs/release-410-september-2025
+  breaking: false
+  additions:
+  - Notification Center expanded to TLP Amber Reports, IOFA feeds, feed creation, organization exports and file downloads
+  - Delivery method settings (in-app, email, Slack, Microsoft Teams) with notification history
+  - Consistent Download button replacing Manual Export in Scanner interfaces
+  - Revamped filter UI for TLP Amber Reports and Data Exports
+- version: '4.9'
+  date: '2025-07'
+  url: https://help.silentpush.com/docs/release-49-august-2025
+  breaking: unknown
+  note: >-
+    Slug says August 2025, title says July 2025. Not fetched in detail.
+
+x-evidence:
+- url: https://help.silentpush.com/docs/release-6-0
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://help.silentpush.com/docs/release-51
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://help.silentpush.com/docs/release-50
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://help.silentpush.com/docs/release-411-november-2025
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://help.silentpush.com/docs/release-410-september-2025
+  http_status: 200
+  fetched: '2026-08-27'

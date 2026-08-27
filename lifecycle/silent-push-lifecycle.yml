@@ -1,0 +1,103 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://help.silentpush.com/docs/2026, the Release Notes section of
+  https://help.silentpush.com/llms.txt, and probes of status.silentpush.com
+versioning:
+  scheme: url-path
+  versions_live: [v1, v2]
+  current_platform_release: '6.0'
+  current_platform_release_date: '2026-06-12'
+  policy_published: false
+  policy_note: >-
+    Silent Push publishes no API versioning policy. v1 and v2 paths coexist with
+    no stated relationship, no support window and no migration guidance.
+
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  note: >-
+    No deprecation policy, no advance-notice commitment, and no RFC 8594
+    Sunset/Deprecation header support documented or observed. Release notes
+    announce additions and renames but never removals with a date. Because
+    nothing is published, NO `Deprecation` pointer is emitted in apis.yml.
+  observed_renames:
+  - from: Web Search
+    to: Context Graph Search
+    release: '6.0'
+    date: '2026-06-12'
+  - from: Threat Intelligence Management
+    to: Defend
+    release: '5.0'
+    date: '2026-02-11'
+  - from: Manual Export (Scanner interfaces)
+    to: Download
+    release: '4.10'
+    date: '2025-09-03'
+  rename_note: >-
+    These are UI/module renames announced in release notes. The docs do not say
+    whether any API path changed with them, which is precisely the gap a
+    deprecation policy would close.
+
+status_page:
+  published: false
+  probed:
+  - url: https://status.silentpush.com/
+    result: DNS did not resolve
+  - url: https://www.silentpush.com/status/
+    result: not present in the site sitemap
+  note: >-
+    No status page or uptime dashboard exists on any Silent Push property. NO
+    `StatusPage` pointer is emitted in apis.yml.
+
+sla:
+  published: false
+  note: >-
+    No SLA, uptime commitment or support-response target is published. The Terms
+    of Use are the only published service terms.
+
+notifications:
+  channel: in-product Notification Center
+  delivery: [in-app, email, Slack, Microsoft Teams]
+  categories: [IOFA, TLP, Releases, Integrations, Monitor Updates]
+  docs: https://help.silentpush.com/docs/notification-center
+  note: >-
+    Release notifications reach logged-in users through the Notification Center.
+    There is no public feed, RSS or webhook an unauthenticated integrator or
+    agent can subscribe to for API change announcements.
+
+lifecycle_stages:
+- surface: REST API v1 (merge-api gateway)
+  stage: ga
+- surface: REST API v2 (live-scan, web-scan, iocs)
+  stage: ga
+- surface: MCP Server
+  stage: beta
+  stage_source: 'Release 6.0 heading "MCP Server (Beta)"'
+  date: '2026-06-12'
+- surface: SPQL
+  stage: alpha
+  stage_source: >-
+    "SPQL is a simple, free-form query language (currently in alpha stage)"
+  note: >-
+    SPQL is in alpha yet is the query interface behind the MCP query_spql tool
+    and the documented scandata search endpoint - an alpha language on a GA
+    path.
+
+changelog:
+  published: true
+  see: changelog/silent-push-changelog.yml
+
+x-evidence:
+- url: https://help.silentpush.com/docs/2026
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://status.silentpush.com/
+  http_status: '<no response - DNS did not resolve>'
+  fetched: '2026-08-27'
+- url: https://help.silentpush.com/docs/release-6-0
+  http_status: 200
+  fetched: '2026-08-27'

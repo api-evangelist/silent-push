@@ -1,0 +1,94 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://www.silentpush.com/community-edition/,
+  https://www.silentpush.com/page-sitemap.xml, and direct probes of
+  /pricing/, /pricing, /plans/
+plan_count: 2
+published_pricing_page: false
+note: >-
+  Silent Push publishes NO pricing page. https://www.silentpush.com/pricing/,
+  /pricing and /plans/ all return 404, and the site's own Yoast page sitemap
+  contains no pricing, plans or editions URL. Two commercial tiers are
+  nonetheless named on the provider's own pages and are recorded below. Third
+  party comparison sites quote per-seat monthly figures for Professional and
+  Teams editions; those are NOT provider-published and are deliberately not
+  recorded here.
+
+plans:
+- name: Community Edition
+  price: 0
+  currency: USD
+  billing_period: none
+  availability: self-service
+  sign_up: https://explore.silentpush.com/register
+  console: https://explore.silentpush.com/
+  description: >-
+    Free introductory access to the Silent Push platform and datasets, aimed at
+    researchers. Includes API access.
+  included_quota: null
+  included_quota_note: >-
+    no query, credit or API-call allowance is published for this tier
+  overage: null
+  limits:
+  - >-
+    Terms of Use restrict the free tier to internal evaluation, testing,
+    proof-of-concept and development in a non-production environment
+  - not for production business operations
+  - may not be used to provide access to external users
+  - Silent Push may limit features or suspend free tier access at any time
+  source: https://www.silentpush.com/community-edition/
+
+- name: Enterprise
+  price: null
+  currency: null
+  billing_period: null
+  availability: contact-sales
+  sign_up: https://www.silentpush.com/book-a-demo/
+  console: https://app.silentpush.com/
+  description: >-
+    Full platform access. Named repeatedly across the documentation as the tier
+    gating Threat Check, TLP Amber Reports, IOFA feeds and organization-level
+    data-source permissions.
+  included_quota: null
+  included_quota_note: >-
+    API call allowance is set per subscription and is not published; see
+    rate-limits/silent-push-rate-limits.yml
+  overage: 'additional API call volume can be purchased (mechanism not published)'
+  entitlements:
+  - Threat Check (unmetered, does not consume usage credits)
+  - TLP Amber Reports
+  - IOFA feeds
+  - organization-level data-source permissioning
+  source: https://help.silentpush.com/docs/security-and-api-integration
+
+other_tiers_referenced:
+- name: Professional
+  note: >-
+    Named in Release 5.1 release notes ("Enterprise, Professional, and Community
+    users") but has no pricing or feature page on any Silent Push property. Not
+    counted in plan_count because the provider publishes nothing describing it.
+- name: Teams
+  note: >-
+    Appears only on third-party comparison sites, never on a Silent Push page.
+    Not counted.
+
+add_ons:
+- name: Analyst Credits
+  purchasable: true
+  price: null
+  docs: https://help.silentpush.com/docs/purchase-an-analsyt-credit.md
+
+x-evidence:
+- url: https://www.silentpush.com/pricing/
+  http_status: 404
+  fetched: '2026-08-27'
+- url: https://www.silentpush.com/plans/
+  http_status: 404
+  fetched: '2026-08-27'
+- url: https://www.silentpush.com/community-edition/
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://www.silentpush.com/book-a-demo/
+  http_status: 200
+  fetched: '2026-08-27'

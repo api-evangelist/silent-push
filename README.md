@@ -64,5 +64,19 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Silent Push is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+Silent Push is a preemptive cyber defense company that maps adversary infrastructure before it is
+weaponized, using a continuously scanned view of the global DNS, web content, certificate and WHOIS
+landscape. Its platform turns that data into Indicators of Future Attack (IOFA), risk scores for
+domains and IP addresses, and threat intelligence feeds that security teams push into SIEM, SOAR and
+blocking infrastructure.
+
+The developer surface is a REST API gateway at `api.silentpush.com` covering enrichment, Passive
+Active DNS (PADNS), live web scanning and screenshots, SPQL search, feed and indicator CRUD, Threat
+Check, TLP reports and export in CSV, JSON, TXT, RPZ and STIX formats, authenticated with an
+`x-api-key` header. Silent Push also runs a hosted Model Context Protocol server that exposes 33
+read-only investigation tools to MCP-compatible AI clients over OAuth 2.1.
+
+- Website: https://www.silentpush.com/
+- Documentation: https://help.silentpush.com/docs/api
+- MCP server: https://help.silentpush.com/docs/mcp-for-silent-push
+- GitHub: https://github.com/Silent-Push

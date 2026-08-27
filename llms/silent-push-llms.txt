@@ -1,0 +1,209 @@
+# Silent Push Knowledge Base
+
+> Knowledge base documentation for Silent Push Knowledge Base.
+
+## v1
+
+- [Platform overview](https://help.silentpush.com/docs/introduction.md)
+- [Onboarding](https://help.silentpush.com/docs/onboarding-1.md)
+- [Silent Push Quick Start Guide](https://help.silentpush.com/docs/silent-push-quick-start-guide.md)
+- [Silent Push Landing Page](https://help.silentpush.com/docs/silent-push-landing-page.md)
+- [Account Management](https://help.silentpush.com/docs/getting-started.md)
+- [Account Setup and Login](https://help.silentpush.com/docs/account-setup-and-login.md)
+- [Query History](https://help.silentpush.com/docs/query-history.md)
+- [User and Organization Management](https://help.silentpush.com/docs/user-and-organization-management.md)
+- [Security and API integration](https://help.silentpush.com/docs/security-and-api-integration.md)
+- [Notification Center](https://help.silentpush.com/docs/notification-center.md)
+- [Purchase Analyst Credits](https://help.silentpush.com/docs/purchase-an-analsyt-credit.md)
+- [View your Subscription](https://help.silentpush.com/docs/view-your-subscription.md): Learn how to view your subscription details.
+- [Insight](https://help.silentpush.com/docs/insight.md)
+- [Live Scan](https://help.silentpush.com/docs/live-scan.md)
+- [Execute a Live Scan](https://help.silentpush.com/docs/execute-a-live-scan.md)
+- [Countries and ISO Alpha-2 Codes by Continent](https://help.silentpush.com/docs/countries-and-iso-alpha-2-codes-by-continent.md)
+- [How to Use Live Scan for Effective Threat Detection](https://help.silentpush.com/docs/how-to-use-live-scan-for-effective-threat-detection.md): You can one-click pivot on domains and IPs returned in a set of Live Scan results, and perform additional DNS queries from within the results set.
+- [Custom User Agent (UA) Strings](https://help.silentpush.com/docs/custom-user-agent-ua-strings.md)
+- [Bulk Enrichment](https://help.silentpush.com/docs/bulk-enrichment.md)
+- [Total View](https://help.silentpush.com/docs/total-view.md)
+- [Get Started with Total View](https://help.silentpush.com/docs/get-started-with-total-view.md)
+- [Highlight: Core Metrics](https://help.silentpush.com/docs/highlight-core-metrics.md)
+- [Flags](https://help.silentpush.com/docs/understand-and-present-flags.md)
+- [Domain Wide View](https://help.silentpush.com/docs/domain-wide-view.md)
+- [Tab Views](https://help.silentpush.com/docs/tabs.md)
+- [Farsight Tab](https://help.silentpush.com/docs/farsight-tab.md)
+- [Zetalytics Tab](https://help.silentpush.com/docs/zetalytics-tab.md)
+- [Tab View Expanded Section](https://help.silentpush.com/docs/tab-view-expanded-section.md)
+- [Screenshots Tab View](https://help.silentpush.com/docs/screenshots-tab.md)
+- [Infrastructure Variance](https://help.silentpush.com/docs/infrastructure-variance-1.md)
+- [Use Cases in Threat Detection](https://help.silentpush.com/docs/use-cases-in-threat-detection.md)
+- [PADNS Tab](https://help.silentpush.com/docs/padns-tab.md)
+- [How to Use PADNS Data - Reverse A](https://help.silentpush.com/docs/how-to-use-padns-data-reverse-a.md)
+- [How to Use Data PADNS SOA Records](https://help.silentpush.com/docs/how-to-use-padns-data-soa-records.md)
+- [PADNS Pivot Guide](https://help.silentpush.com/docs/pivot-a-record.md)
+- [Domain Pivot on an A Record](https://help.silentpush.com/docs/domain-pivot-on-an-a-record.md)
+- [Web Search Tab](https://help.silentpush.com/docs/web-search-tab-1.md)
+- [How to Use Web Search](https://help.silentpush.com/docs/how-to-use-web-search.md)
+- [Subdomain Tab View](https://help.silentpush.com/docs/subdomain-tabs.md)
+- [WHOIS Tab](https://help.silentpush.com/docs/whois-tab-1.md)
+- [How to Use WHOIS tab](https://help.silentpush.com/docs/how-to-use-whois-tab.md)
+- [Certificates](https://help.silentpush.com/docs/certificates.md)
+- [Dangling DNS Tab View](https://help.silentpush.com/docs/dangling-dns-tab-view.md)
+- [How to Detect and Mitigate Risks](https://help.silentpush.com/docs/how-to-detect-and-mitigate-risks.md)
+- [Threat Feeds Tab View](https://help.silentpush.com/docs/threat-feeds-tab.md)
+- [Context Similarity Tab View](https://help.silentpush.com/docs/contextsimiliarity-tab.md)
+- [Traffic Origin](https://help.silentpush.com/docs/traffic-origin.md)
+- [Traffic Origin Tab](https://help.silentpush.com/docs/traffic-origin-tab.md)
+- [Defend](https://help.silentpush.com/docs/defend.md)
+- [Threat Check](https://help.silentpush.com/docs/threat-check.md)
+- [TLP Amber Reports](https://help.silentpush.com/docs/tlp-amber-reports.md): How to access TLP Amber reports and how to understand TLP Amber reports
+- [Latest IOFA - Stay Ahead of Emerging Threats](https://help.silentpush.com/docs/latest-iofa-stay-ahead-of-emerging-threats.md)
+- [IOFA Feeds](https://help.silentpush.com/docs/iofa-feeds-1.md)
+- [How To Use IOFA Feeds](https://help.silentpush.com/docs/how-to-use-iofa-feeds.md)
+- [IOFA vs. IOC](https://help.silentpush.com/docs/iofa-vs-ioc.md)
+- [Feed Library](https://help.silentpush.com/docs/all-feeds.md)
+- [Create and Manage Threat Intelligence Feeds](https://help.silentpush.com/docs/create-and-manage-threat-intelligence-feeds.md)
+- [Feed Search](https://help.silentpush.com/docs/feed-search.md)
+- [How To Use Feed Search](https://help.silentpush.com/docs/how-to-use-feed-search.md)
+- [Feed Comparison](https://help.silentpush.com/docs/feed-comparison.md)
+- [Data Export](https://help.silentpush.com/docs/data-export.md)
+- [Get Started with Data Export](https://help.silentpush.com/docs/get-started-with-data-export.md)
+- [Real-World Examples for Data Export](https://help.silentpush.com/docs/real-world-examples-for-data-export.md)
+- [Use Cases for Data Export](https://help.silentpush.com/docs/use-cases-for-data-export.md)
+- [IP Context](https://help.silentpush.com/docs/ip-context.md)
+- [IOFA Exports](https://help.silentpush.com/docs/iofa-export.md)
+- [Bulk Data Exports](https://help.silentpush.com/docs/bulk-data-exports.md)
+- [Archive Exports](https://help.silentpush.com/docs/archive-exports.md)
+- [Organization Exports](https://help.silentpush.com/docs/organization-exports.md)
+- [How To Use Your Organization Exports](https://help.silentpush.com/docs/how-to-use-your-organization-exports.md)
+- [Reconnaissance](https://help.silentpush.com/docs/reconnaissance.md)
+- [Context Graph Search](https://help.silentpush.com/docs/context-graph-search.md): Web Scanner is a feature of the Community and Enterprise console that allows users to execute command line or constructor queries that interrogate the Silent Push web content database, and hunt for malicious websites.
+- [Create a Context Graph Search Query](https://help.silentpush.com/docs/create-a-context-graph-search-query.md)
+- [How to Use Context Search Graph Results](https://help.silentpush.com/docs/how-to-use-context-search-graph-results.md): Results from scans run using either the Command Line or Constructor appear in a collapsible Results table.
+- [Build Queries in Context Graph Search](https://help.silentpush.com/docs/how-to-build-queries-in-context-graph-search.md)
+- [Context Graph Search Datasources](https://help.silentpush.com/docs/context-graph-search-datasources.md)
+- [Fine-Tune Context Graph Searches with Time Filters](https://help.silentpush.com/docs/fine-tune-context-graph-searches-with-time-filters.md)
+- [Save and Automate Context Graph Search Queries](https://help.silentpush.com/docs/save-and-automate-context-graph-search-queries.md)
+- [DNS](https://help.silentpush.com/docs/dns-data.md)
+- [Perform DNS and Record-Specific Lookups](https://help.silentpush.com/docs/perform-passive-dns-scans-and-record-specific-lookups.md)
+- [WHOIS](https://help.silentpush.com/docs/whois-data-1.md)
+- [Get Started with Whois](https://help.silentpush.com/docs/get-started-with-whois.md)
+- [WHOIS Search](https://help.silentpush.com/docs/whois-search.md)
+- [Whois Use Cases](https://help.silentpush.com/docs/whois-use-cases.md)
+- [Identify Bulk Domain Abuse and Burner Infrastructure](https://help.silentpush.com/docs/identify-bulk-domain-abuse-and-burner-infrastructure.md)
+- [Track Lumma Stealer Infrastructure Using WHOIS Pivots](https://help.silentpush.com/docs/track-lumma-stealer-infrastructure-using-whois-pivots.md)
+- [Monitors](https://help.silentpush.com/docs/monitoring.md)
+- [Monitored Queries](https://help.silentpush.com/docs/monitored-queries.md)
+- [Create a Query](https://help.silentpush.com/docs/create-a-query.md): The Silent Push Monitoring feature is of particular use to security teams and/or job roles that have clearly defined defense duties focused on one or more distinct areas of an attack surface.
+- [Impersonation](https://help.silentpush.com/docs/impersonation.md)
+- [Brand Impersonation Monitoring and Queries](https://help.silentpush.com/docs/brand-impersonation-monitoring-and-queries.md)
+- [Domain Impersonation](https://help.silentpush.com/docs/domain-impersonation.md)
+- [Email Impersonation](https://help.silentpush.com/docs/email-impersonation.md)
+- [Favicon Impersonation](https://help.silentpush.com/docs/favicon-impersonation.md)
+- [HTML Title Impersonation](https://help.silentpush.com/docs/html-title-impersonation.md)
+- [Unmasking Global Phishing: Silent Push Exposes CDC Voucher Scammers](https://help.silentpush.com/docs/silent-push-exposes-cdc-voucher-scammers.md)
+- [Advanced Query Builder](https://help.silentpush.com/docs/advanced-query-builder.md)
+- [Private Queries](https://help.silentpush.com/docs/private-queries.md)
+- [Shared Queries](https://help.silentpush.com/docs/shared-queries.md)
+- [Template Queries](https://help.silentpush.com/docs/template-queries.md)
+- [Domain Queries](https://help.silentpush.com/docs/domain-queries.md)
+- [Domain Search](https://help.silentpush.com/docs/domain-search-1.md)
+- [Search for certificates on a domain](https://help.silentpush.com/docs/search-for-certs-on-a-domain.md): Keeping a record of domain certificates is an important aspect of maintaining a strong cyber security posture, and protecting an organization's assets, reputation, and operations against downtime and/or malicious behaviour.
+- [Search for all certificates related to a domain (Cousin)](https://help.silentpush.com/docs/get-domain-cousins.md): The Silent Push Domain Cousins query searches for certificates with the same domain as the target domain, allowing you to quickly populate a list of your organization's domains based off one simple lookup.
+- [Obtain Domain Information](https://help.silentpush.com/docs/obtain-domain-information.md)
+- [Obtain Domain Infratag](https://help.silentpush.com/docs/obtain-domain-infratag.md): An infratag is a custom text string generated by Silent Push that contains the following information on a domain (in order, on one line, with values separate by a colon).
+- [Obtain a Nameserver's Reputation Score](https://help.silentpush.com/docs/obtain-a-nameservers-reputation-score.md): Silent Push provides a fast, simple lookup that allows organizations to ascertain a nameserver's reputation score.
+- [Monitor Nameserver Changes](https://help.silentpush.com/docs/monitor-nameserver-changes.md)
+- [Obtain a Risk Score for a domain](https://help.silentpush.com/docs/obtain-a-silent-push-risk-score-for-a-domain.md): Silent Push uses a proprietary algorithm to assign risk scores to every domain visible on a daily scan of the Internet's IPv4 infrastructure.
+- [Obtain Domain WHOIS Information](https://help.silentpush.com/docs/obtain-domain-whois-information.md)
+- [Scan for Domain Siblings](https://help.silentpush.com/docs/scan-for-domain-siblings.md): Threat actors use domain siblings to impersonate a legitimate domain or website in order to deceive users and steal sensitive information.
+- [Enrichment Queries](https://help.silentpush.com/docs/enrichment-queries.md)
+- [Bulk Domain Enrichment](https://help.silentpush.com/docs/bulk-domain-enrichment.md)
+- [Access Enrichment Queries](https://help.silentpush.com/docs/access-enrichment-queries.md)
+- [IPv4 Queries](https://help.silentpush.com/docs/ipv4-queries.md)
+- [ASN information for IP addresses](https://help.silentpush.com/docs/get-asn-information-for-a-list-of-ipv4-addresses.md): Silent Push allows you to obtain ASN information for a list of IPv4 addresses.
+- [Obtain basic IP address information](https://help.silentpush.com/docs/obtain-ip-address-information.md): Silent Push allows you to get granular information relating to a specific IP address relating to Autonymous System Number (ASN), ASN reputation scores, certificate information,
+Tor and IPFS nodes, geographic location, subnet data
+- [Risk Score for IP addresses](https://help.silentpush.com/docs/get-the-silent-push-risk-score-for-a-specific-ip-address.md): Silent Push uses a proprietary algorithm to assign risk scores to every domain visible on a daily scan of the Internet's IPv4 infrastructure.
+- [Certificate information relating to an IP address](https://help.silentpush.com/docs/get-certificate-information-relating-to-an-ip-address.md): Silent Push allows you to search through data from our daily scans of the Internet's IPv4 range to obtain information on certificates.
+- [Analyze HTTP Headers to Combat Cyber Threats](https://help.silentpush.com/docs/analyze-http-headers-to-combat-cyber-threats.md): Silent Push allows you to search through data from our daily scans of the Internet's IPv4 range to obtain information on a broad range of elements related to HTTP headers.
+- [Search for JARM Data](https://help.silentpush.com/docs/scan-for-jarm-data.md): JARM (Just Another Ruby Mod) is a tool used identify TLS servers based on their behavior and configuration, allowing security teams to identify servers that are using outdated or insecure TLS configurations. Silent Push allows you to search through data from our daily scans of the Silent Push allows you to scan the Internet's IPv4 range to obtain information JARM data.
+- [IPv6 Queries](https://help.silentpush.com/docs/ipv6-queries.md)
+- [How to Retrieve Detailed IPv6 Address Information](https://help.silentpush.com/docs/how-to-retrieve-detailed-ipv6-address-information.md)
+- [PADNS Queries](https://help.silentpush.com/docs/passive-dns-queries-1.md)
+- [How to Query Self-Hosted Domains for Security Insights](https://help.silentpush.com/docs/how-to-query-self-hosted-domains-for-security-insights.md)
+- [Analyze DNS Records to Uncover Cyber Threats](https://help.silentpush.com/docs/analyze-dns-records-to-uncover-cyber-threats.md)
+- [Analyze Domain Relationships to Uncover Cyber Threats](https://help.silentpush.com/docs/analyze-domain-relationships-to-uncover-cyber-threats.md)
+- [How to Track DNS Changes with Hash Values](https://help.silentpush.com/docs/how-to-track-dns-changes-with-hash-values.md): Silent Push allows organizations to quickly obtain information on server names that belong to an nshash or mxhash.
+- [Reputation Queries](https://help.silentpush.com/docs/reputation-queries.md)
+- [Utils Queries](https://help.silentpush.com/docs/utils-queries-3.md)
+- [Job ID Status](https://help.silentpush.com/docs/job-id-status.md)
+- [Xperimental Queries](https://help.silentpush.com/docs/experimental-queries.md)
+- [Dangling DNS via Query Builder](https://help.silentpush.com/docs/dangling-dns-via-query-builder.md)
+- [DNS data analysis](https://help.silentpush.com/docs/dns-data-analysis.md)
+- [WHOIS data retrieval](https://help.silentpush.com/docs/whois-data-retrieval.md)
+- [Find Similar Files Using ssdeep Fuzzy Hashing](https://help.silentpush.com/docs/find-similar-files-using-ssdeep-fuzzy-hashing.md): Security teams can use Silent Push to scan for ssdeep hashes, allowing them to identify and track different versions of the same malware, as well as identifying similar or related malware strains, and use comparative datasets to better understand the tactics and infrastructure used by malicious actors.
+- [Tools](https://help.silentpush.com/docs/tools.md)
+- [On-Demand Endpoint Scan](https://help.silentpush.com/docs/on-demand-endpoint-scan.md)
+- [Live DNS Lookup](https://help.silentpush.com/docs/tools-live-dns-lookup.md)
+- [Autospoof Generator](https://help.silentpush.com/docs/tools-autospoof-generator.md)
+- [Visual Endpoint Monitoring](https://help.silentpush.com/docs/tools-visual-endpoint-monitoring.md)
+- [Network and Registration Analysis](https://help.silentpush.com/docs/tools-network-and-registration-analysis.md)
+- [SPQL](https://help.silentpush.com/docs/spql.md): SPQL is a simple, free-form query language (currently in alpha stage) that enables data exploration via the Silent Push API via simple and intuitive syntax. SPQL can be used to search the Silent Push scan data repositories and may eventually be extended to other data repositories.
+- [SPQL Syntax Rules](https://help.silentpush.com/docs/syntax.md): SPQL's syntax is comprised of a combination of three elements: Field names, Operators and Values. Each element is separated by a space, and linked together with an AND separator.
+- [SPQL Query Examples](https://help.silentpush.com/docs/query-examples.md)
+- [SPQL Data Fields](https://help.silentpush.com/docs/spql-data-fields.md)
+- [SPQL Data Sources](https://help.silentpush.com/docs/data-sources.md): Scanned data is grouped into 6 separate repositories, known as a data source.
+
+The datasource field name is used to target different data sources in Web Scanner queries.
+
+Each data source has a set of field names that you can use to search within it.
+- [SPQL Command Line Utility](https://help.silentpush.com/docs/command-line-utility.md): SPQL features a simple command line client that allows users to write plain SPQL queries. Queries can either be executed directly or run to only display the JSON encoded query to be used in conjunction with curl or Postman.
+- [Build Queries in Context Graph Search](https://help.silentpush.com/docs/build-queries-in-web-search.md)
+- [Control Time Frames in Web Search Queries](https://help.silentpush.com/docs/control-time-frames-in-web-search-queries.md)
+- [API](https://help.silentpush.com/docs/api.md)
+- [Get Started with API](https://help.silentpush.com/docs/get-started-with-api.md)
+- [API Feature Overview](https://help.silentpush.com/docs/silent-push-api-highlights.md)
+- [CLI Quickstart Guide](https://help.silentpush.com/docs/silent-push-command-line-interface-cli-guide.md)
+- [Integrations](https://help.silentpush.com/docs/plug-ins.md)
+- [Cyware](https://help.silentpush.com/docs/coward.md)
+- [Power your Security Stack](https://help.silentpush.com/docs/power-your-security-stack.md)
+- [CrowdStrike Indicator Feed Integration](https://help.silentpush.com/docs/crowdstrike-integration.md)
+- [D3 Security](https://help.silentpush.com/docs/d3-security.md)
+- [Google SecOps Integration](https://help.silentpush.com/docs/google-secops-integration.md)
+- [Palo Alto XSOAR](https://help.silentpush.com/docs/palo-alto-xsoar.md)
+- [ServiceNow Integration](https://help.silentpush.com/docs/servicenow-integration.md)
+- [Silent Push Chrome Extension](https://help.silentpush.com/docs/silent-push-chrome-extension.md)
+- [Splunk 3.0](https://help.silentpush.com/docs/splunk-30.md)
+- [Splunk SIEM](https://help.silentpush.com/docs/splunk-siem.md)
+- [Splunk SOAR Integration](https://help.silentpush.com/docs/splunk-soar.md): Silent Push has a Splunk SOAR app that allows users to utilize Silent Push data within Splunk workflows.
+- [Sumo Logic Integration](https://help.silentpush.com/docs/sumologic-integration.md)
+- [Swimlane Integration](https://help.silentpush.com/docs/swimlane-integration.md)
+- [ThreatConnect Integration](https://help.silentpush.com/docs/threatconnect-integration.md): Silent Push offers both an inbound and outbound integration with ThreatConnect to allow users of both platforms to utilize our enrichment, DNS, and threat intelligence data.
+- [Tines Integration](https://help.silentpush.com/docs/tines.md): Silent Push has collaboarated with Tines to make a collection of our API endpoints available that can be used within workflows to improve your security automation operation.
+- [Torq Integration](https://help.silentpush.com/docs/torq.md): Silent Push has partnered with Torq to make a collection of our API endpoints available within Torq workflows.
+- [MCP for Silent Push](https://help.silentpush.com/docs/mcp-for-silent-push.md)
+- [Tips and Tricks](https://help.silentpush.com/docs/tips-and-tricks.md)
+- [High Confidence Threat Hunting Playbook](https://help.silentpush.com/docs/high-confidence-threat-hunting-playbook.md)
+- [Risk scores](https://help.silentpush.com/docs/understand-risk-scores.md)
+- [How Silent Push Calculates Risk Scores](https://help.silentpush.com/docs/how-silent-push-calculates-risk-scores.md)
+- [Use Simple Search](https://help.silentpush.com/docs/use-simple-search.md)
+- [Use Advanced Search](https://help.silentpush.com/docs/use-advanced-search.md)
+- [Standard Pivot Control](https://help.silentpush.com/docs/pivot-point-control.md)
+- [Use our REGEX Cheat Sheet](https://help.silentpush.com/docs/use-our-regex-cheat-sheet.md)
+- [Pivot through PADNS Data](https://help.silentpush.com/docs/perform-a-quick-padns-lookup.md): Silent Push allows you to perform a one-click operation that pivots through passive DNS data from a single observable, and perform queries and reverse lookups from the same menu on a range of DNS records.
+- [Copy Raw Query Data](https://help.silentpush.com/docs/copying-raw-data.md): Silent Push allows you to quickly export the raw data generated by a query - including information pertaining to API endpoints and query parameters. You can use this information in all manners of ways, by feeding it into internal security tools, in an API integration or for general data sorting purposes.
+- [Save and Share Queries in Advanced Query Builder](https://help.silentpush.com/docs/saving-queries.md): Silent Push organizational users are able to save individual queries ran from Advanced Query Builder, and store them in the Private Queries menu for future analysis, or to share with their organization.
+- [View a List of Historic Queries](https://help.silentpush.com/docs/viewing-a-list-of-historic-queries.md): The Query History section stores all queries run by a user over a period of 30 days.
+- [Understand Total View Query Response Times](https://help.silentpush.com/docs/understand-total-view-query-response-times.md)
+- [HTML Content Similarity](https://help.silentpush.com/docs/html-content-similarity.md)
+- [2026](https://help.silentpush.com/docs/2026.md)
+- [Release 5.1](https://help.silentpush.com/docs/release-51.md)
+- [Release 5.0](https://help.silentpush.com/docs/release-50.md)
+- [Release 6.0](https://help.silentpush.com/docs/release-6-0.md)
+- [2025](https://help.silentpush.com/docs/2025.md)
+- [Release 4.11 (November 2025)](https://help.silentpush.com/docs/release-411-november-2025.md)
+- [Release 4.10 (September 2025)](https://help.silentpush.com/docs/release-410-september-2025.md)
+- [Release 4.9 (July 2025)](https://help.silentpush.com/docs/release-49-august-2025.md)
+
+## v1-api (API Reference)
+
+- [Perform a live scan](https://help.silentpush.com/apidocs/perform-a-live-scan.md)

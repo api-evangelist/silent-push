@@ -1,0 +1,70 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://help.silentpush.com/docs/get-started-with-api,
+  https://help.silentpush.com/docs/api, plus live header inspection of
+  api.silentpush.com (2026-08-27)
+limit_count: 0
+note: >-
+  Silent Push publishes NO numeric rate limits. The documentation states only
+  that "the number of permitted API calls depends on your subscription level and
+  any additional purchases" and that Silent Push emails the customer when the
+  daily API limit is reached - a quota expressed as a commercial term, never as
+  a published figure. No tier, window, burst or per-endpoint number appears
+  anywhere on the public docs.
+
+limits: []
+
+quota_model:
+  unit: API calls (credits)
+  window: daily
+  scope: organization / subscription
+  determined_by: subscription level plus additional purchases
+  published_values: false
+  exhaustion_notice: email notification when the daily API limit is reached
+  metered_operations:
+  - name: Live Scan (scan-on-demand)
+    note: 'documented as "Consumes API credits per scan"'
+  unmetered_operations:
+  - name: Threat Check
+    note: >-
+      documented as unlimited/unrestricted for Enterprise customers and as not
+      consuming usage credits
+  introspection_endpoint:
+    documented: true
+    section: 'Users & Quota'
+    description: >-
+      The API exposes endpoints to retrieve user profiles, organization quota
+      information and current API usage limits. The paths are not published
+      outside the login wall, so an agent cannot discover its own remaining
+      quota without first reading the gated reference.
+
+response_headers:
+  observed: []
+  observed_note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header was present on live
+    responses from api.silentpush.com. Response headers observed on an
+    unauthenticated 401 were limited to vary and allow. Rate-limit headers may
+    still be emitted only on authenticated or throttled responses, which could
+    not be reached without a key.
+  documented: []
+  documented_note: no rate-limit response header is documented anywhere in the public docs
+  exhaustion_status_code: null
+  exhaustion_status_note: >-
+    the status code returned on quota exhaustion is not documented and was not
+    observable
+
+agent_impact: >-
+  An agent calling Silent Push has no runtime signal of how much quota it has
+  left and no documented retry contract. It learns it is out of credits from an
+  email to a human, not from the response.
+
+x-evidence:
+- url: https://help.silentpush.com/docs/get-started-with-api
+  http_status: 200
+  fetched: '2026-08-27'
+  finding: 'quota described as subscription-dependent; no numbers'
+- url: https://api.silentpush.com/api/v2/live-scan/scan-on-demand/query/?url=https://example.com
+  http_status: 401
+  fetched: '2026-08-27'
+  finding: no rate-limit headers on the response

@@ -1,0 +1,82 @@
+generated: '2026-08-27'
+method: searched
+source: https://github.com/Silent-Push/SP---CLI
+name: sp
+display_name: Silent Push Command Line Interface
+official: true
+repository: https://github.com/Silent-Push/SP---CLI
+language: python
+license: null
+status: unmaintained
+status_basis: >-
+  last repository push 2024-11-06; the documented wheel download host
+  (labs.silentpush.com) did not resolve when probed on 2026-08-27.
+
+install:
+  - method: wheel
+    command: 'python3 -m pip install SilentPushCLI-0.0.1-py3-none-linux.whl'
+    source: https://labs.silentpush.com/jorgeley/
+    source_status: unreachable (no DNS answer, probed 2026-08-27)
+  - method: pypi
+    available: false
+    note: not published to PyPI under any name owned by Silent Push
+
+authentication:
+  method: environment variable
+  variable: SILENT_PUSH_API_KEY
+  note: 'export SILENT_PUSH_API_KEY=YOUR-API-KEY before use'
+
+usage: 'sp COMMAND [SUB-COMMAND...] IOC [PARAMETER=VALUE...] [OPTION...]'
+
+commands:
+  - name: score
+    description: Retrieve the Silent Push risk score for an observable.
+    example: sp score example.com
+  - name: enrich
+    description: Enrich a single observable.
+    example: sp enrich example.com -es
+  - name: bulk_enrich
+    description: Enrich multiple observables in one invocation.
+    example: sp bulk_enrich example.com example.org example.net -es
+  - name: padns
+    description: Passive Active DNS lookups.
+    subcommands:
+      - name: query
+        description: Forward PADNS lookup by record type.
+        record_types: [any, anyipv4, anyipv6, a, aaaa, cname, mx, ns, ptr4, ptr6, soa, txt]
+        example: sp padns query a example.com limit=2 sort=last_seen/-
+      - name: answer
+        description: Answer-direction PADNS lookup by record type.
+        record_types: [a, aaaa, cname, mx, mxhash, ns, nshash, ptr4, ptr6, soa, soahash, txt, txthash]
+  - name: load
+    description: Load a script or module in interactive mode.
+
+options:
+  - flags: ['-j', '--json']
+    description: JSON output (default).
+    scope: all commands
+  - flags: ['-c', '--csv']
+    description: CSV output.
+    scope: all commands
+
+features:
+  interactive_mode: true
+  scripting:
+    run_pyscript: true
+    run_script: true
+    note: batch execution supported
+  library_use: true
+  library_note: >-
+    the README documents a "Using the library" mode, so the package is usable as
+    a Python client library as well as a CLI.
+
+x-evidence:
+  - url: https://github.com/Silent-Push/SP---CLI
+    http_status: 200
+    fetched: '2026-08-27'
+  - url: https://raw.githubusercontent.com/Silent-Push/SP---CLI/main/README.md
+    http_status: 200
+    fetched: '2026-08-27'
+  - url: https://labs.silentpush.com/jorgeley/
+    http_status: '<no response - DNS did not resolve>'
+    fetched: '2026-08-27'

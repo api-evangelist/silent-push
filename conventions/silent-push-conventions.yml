@@ -1,0 +1,212 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://help.silentpush.com/docs/get-started-with-api,
+  https://help.silentpush.com/docs/api,
+  https://help.silentpush.com/apidocs/perform-a-live-scan,
+  https://help.silentpush.com/docs/job-id-status,
+  https://help.silentpush.com/docs/spql, the first-party Postman collection
+  (postman/silent-push-web-scanner.postman_collection.json) and the first-party
+  CLI (https://github.com/Silent-Push/SP---CLI), plus live probes of
+  api.silentpush.com
+note: >-
+  The OpenAPI is auth-gated (401 at https://api.silentpush.com/api/schema/), so
+  nothing here is derived from a spec. Every convention below is read from a
+  published document, a first-party artifact, or an observed live response.
+
+auth_style:
+  primary: 'api key in the x-api-key request header'
+  secondary: 'OAuth 2.1 bearer token on the MCP endpoint only'
+  see: authentication/silent-push-authentication.yml
+
+versioning:
+  style: url-path
+  versions_in_use: [v1, v2]
+  pattern: 'https://api.silentpush.com/api/{version}/...'
+  note: >-
+    v1 and v2 coexist and are not a clean successor pair. The documented base URL
+    is the v1 merge-api gateway (/api/v1/merge-api/) while live scan, web scan
+    and threat ranking sit on /api/v2/. Some capabilities are reachable on both
+    - the API Feature Overview lists live scan as /api/v2/live-scan/... but
+    links it to /api/v1/merge-api/explore/tools/scanondemand.
+  version_header: null
+  version_negotiation: none documented
+  policy_published: false
+
+pagination:
+  style: limit-based
+  params:
+  - name: limit
+    description: maximum records to return
+    evidence: 'first-party Postman collection uses ?limit=100; CLI uses limit=2'
+  offset_param: null
+  cursor_param: null
+  response_envelope_fields: null
+  note: >-
+    Only `limit` is observable in first-party examples. No offset, page, cursor
+    or next-link parameter is published, and no total/has_more response field is
+    documented, so an agent cannot reliably page a large result set from the
+    public documentation alone.
+
+sorting:
+  param: sort
+  forms:
+  - form: 'sort=<field>/-'
+    source: first-party CLI (`sp padns query a example.com sort=last_seen/-`)
+  - form: '"sort": ["<field>/desc"]'
+    source: first-party Postman collection request body
+  note: >-
+    Two different descending-sort spellings appear in first-party material
+    (`/-` and `/desc`). The docs do not reconcile them.
+
+response_shaping:
+  with_metadata:
+    param: with_metadata
+    values: [0, 1]
+    description: include the response metadata block alongside data
+    evidence: first-party Postman collection uses with_metadata=1
+  field_expansion: none documented
+  sparse_fieldsets: none documented
+
+query_language:
+  name: SPQL
+  full_name: Silent Push Query Language
+  status: alpha
+  status_source: >-
+    "SPQL is a simple, free-form query language (currently in alpha stage)"
+    (llms.txt description of help.silentpush.com/docs/spql)
+  transport: 'JSON request body, e.g. {"query": "favicon_murmur3 = 309020573 AND domain != \"paypal.com\"", "sort": ["scan_date/desc"]}'
+  syntax: 'field name, operator, value; clauses joined with AND'
+  docs: https://help.silentpush.com/docs/spql
+  data_sources: 6 scan-data repositories
+  data_sources_docs: https://help.silentpush.com/docs/data-sources
+
+async_operations:
+  supported: true
+  pattern: job-id polling
+  request_param:
+    name: max_wait
+    description: >-
+      seconds the caller is willing to block before the API returns a job handle
+      instead of results
+    evidence: first-party Postman collection uses max_wait=1
+  status_check:
+    name: Job ID Status
+    field: job_id
+    description: >-
+      long-running scans and lookups return a job ID; the caller polls for
+      status or retrieves the finished result by that ID
+    docs: https://help.silentpush.com/docs/job-id-status
+  note: >-
+    Release 4.11 (2025-11-17) shipped "an updated version of the SPQL API,
+    featuring enhanced asynchronous processing" for long-running queries. The
+    job-status endpoint path is documented only as an in-app tool, not as a REST
+    path, so an agent cannot poll it from the public docs alone.
+
+error_envelope:
+  format: vendor
+  shape: '{"errors": [{"message": "...", "code": "..."}]}'
+  content_type: application/json
+  rfc9457: false
+  see: errors/silent-push-problem-types.yml
+
+request_id_tracing:
+  supported: false
+  header: null
+  note: >-
+    No request-id, correlation-id or trace header is documented, and none was
+    present on observed live responses. An agent has no handle to quote back to
+    support for a specific failed call.
+
+rate_limit_signaling:
+  headers: []
+  note: >-
+    No rate-limit response headers observed or documented. See
+    rate-limits/silent-push-rate-limits.yml.
+
+idempotency:
+  supported: false
+  header: null
+  scope: null
+  retention: null
+  note: >-
+    No Idempotency-Key header, request-key parameter or replay-safety guarantee
+    is documented anywhere in the Silent Push public documentation, and none was
+    observable. The provider does document write operations (feed and indicator
+    CRUD), so this is a genuine gap rather than a not-applicable. NO
+    `Idempotency` pointer is emitted in apis.yml, because asserting one would
+    claim a guarantee the provider has not made.
+
+dry_run_mode:
+  supported: false
+  note: >-
+    No dry-run, preview or validate-only mode is documented for any write
+    operation.
+
+reversibility:
+  state: none
+  grade: null
+  grade_note: >-
+    Ungraded. Grading requires at least a documented reversal path; Silent Push
+    publishes none, so this scores zero rather than `documented` (0.4) or
+    `verified` (1.0). It is explicitly NOT `na` - see write_surface below.
+  write_surface:
+    exists: true
+    operations:
+    - capability: Feeds
+      actions: [create, update, enrich, delete]
+      source: https://help.silentpush.com/docs/api
+      note: '"Complete CRUD operations for managing custom threat intelligence feeds"'
+    - capability: Feed Indicators
+      actions: [add, update, delete, tag, bulk]
+      source: https://help.silentpush.com/docs/api
+      note: '"Manage individual indicators (IOCs) within feeds"'
+    - capability: Feed Tags
+      actions: [create, update, delete]
+      source: https://help.silentpush.com/docs/api
+    - capability: Monitors and saved queries
+      actions: [create, edit, delete]
+      source: https://help.silentpush.com/docs/release-411-november-2025
+      note: >-
+        Release 4.11 added editing of existing monitors and granular control
+        over exported data. UI-first; REST paths not published.
+  reversal_operations: []
+  windows: []
+  finding: >-
+    No cancel, undo, restore, soft-delete, trash, recycle-bin, versioning or
+    rollback affordance is documented for any Silent Push write operation, and
+    no retention window is stated for deleted feeds, indicators or tags. An
+    agent that deletes a customer's threat feed has no published way to get it
+    back and no way to know whether Silent Push retains it at all. NO window is
+    asserted here, because the documentation states none.
+  read_only_surfaces:
+  - name: MCP server
+    note: >-
+      All 33 published MCP tools are read-only (enrichment, PADNS, reputation,
+      scanning, SPQL). Reversibility is genuinely `na` for the MCP surface -
+      an agent working through MCP cannot mutate anything.
+  scope_note: >-
+    Because the MCP surface is read-only and the REST write surface is
+    undocumented for reversal, the practical risk sits entirely on direct REST
+    integrations, not on agent traffic.
+
+cross_links:
+  errors: errors/silent-push-problem-types.yml
+  lifecycle: lifecycle/silent-push-lifecycle.yml
+  authentication: authentication/silent-push-authentication.yml
+  rate_limits: rate-limits/silent-push-rate-limits.yml
+  data_model: data-model/silent-push-data-model.yml
+
+x-evidence:
+- url: https://help.silentpush.com/docs/job-id-status
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://help.silentpush.com/docs/api
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://raw.githubusercontent.com/Silent-Push/Web-Scanner-Postman-Collection/main/Silent%20Push%20Web%20Scanner%20Quick%20Help%20Requests.postman_collection.json
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://api.silentpush.com/api/schema/
+  http_status: 401
+  fetched: '2026-08-27'

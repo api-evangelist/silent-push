@@ -1,0 +1,301 @@
+generated: '2026-08-27'
+method: derived
+source: >-
+  the published response schema on
+  https://help.silentpush.com/apidocs/perform-a-live-scan (the only fully
+  documented Silent Push response object outside the login wall), the API
+  section list on https://help.silentpush.com/docs/api, the first-party Postman
+  collection, and the first-party CLI command tree
+note: >-
+  DERIVED FROM DOCUMENTATION, NOT FROM A SPEC. Silent Push's OpenAPI is
+  auth-gated (401 at https://api.silentpush.com/api/schema/), so there are no
+  $ref links or component schemas to walk. Field names and nesting under
+  `web_scan_result` are verbatim from the published Live Scan reference.
+  Relationships between the higher-level entities are inferred from the
+  documented API sections and are marked with confidence.
+
+entities:
+- name: web_scan_result
+  description: >-
+    The object returned by an on-demand live scan of a URL. The richest
+    published Silent Push schema.
+  source: https://help.silentpush.com/apidocs/perform-a-live-scan
+  confidence: high
+  identity_fields: [datahash, url, hostname, domain, ip]
+  fields:
+    top_level: [metadata, data]
+    data: [HHV, datahash, domain, hostname, ip, url, path, port, scheme, subdomain, tld,
+      htmltitle, jarm, file, mobile_enabled, opendirectory, proxy_enabled, redirect,
+      redirect_count, redirect_list, resolves_to, response, screenshot, user-agent,
+      html_body_length, html_body_murmur3, html_body_sha256, html_body_similarity, html_body_ssdeep,
+      favicon_avg, favicon_md5, favicon_murmur3, favicon_path, favicon_urls, favicon_icons,
+      favicon2_avg, favicon2_md5, favicon2_murmur3, favicon2_path, logo_urls,
+      origin_domain, origin_hostname, origin_ip, origin_path, origin_port, origin_resolves_to,
+      origin_scheme, origin_subdomain, origin_tld, origin_url]
+  embedded_objects:
+  - name: ssl
+    fields: [CHV, SHA1, SHA256, authority_key_id, expired, sans, sans_count, serial_number,
+      sigalg, subject_key_id, valid, wildcard, not_after, not_before]
+    nested:
+    - name: ssl.issuer
+      fields: [common_name, country, organization]
+    - name: ssl.subject
+      fields: [common_name]
+  - name: header
+    fields: [cache-control, content-encoding, content-type, expires, server, x-powered-by]
+  - name: adtech
+    fields: [ads_txt, app_ads_txt, sellers_json]
+  - name: body_analysis
+    fields: [ICP_license, SHV, adsense, body_sha256, footer_sha256, header_sha256,
+      google-GA4, google-UA, google-adstag, js_sha256, js_ssdeep, language, onion, telegram]
+  - name: asn_information
+    fields: [asn, asname, ip]
+  - name: feeds_containing_ioc
+    fields: [items]
+
+- name: domain
+  description: A DNS domain, the primary observable of the platform.
+  confidence: high
+  identity_fields: [domain]
+  attributes: [risk_score, whois, infratag, reputation]
+  source: >-
+    documented Enrich section, explore/domain/whois and
+    explore/domain/domaininfo/{domain} endpoints, CLI `score`/`enrich` commands
+
+- name: ip_address
+  description: An IPv4 or IPv6 address.
+  confidence: high
+  identity_fields: [ip]
+  attributes: [reputation, diversity, asn, traffic_origin]
+  source: documented Enrich and Traffic Origin sections
+
+- name: asn
+  description: An autonomous system.
+  confidence: high
+  identity_fields: [asn]
+  attributes: [asname, reputation]
+
+- name: nameserver
+  description: A DNS nameserver observed in PADNS data.
+  confidence: medium
+  attributes: [reputation, domains_served]
+
+- name: subnet
+  description: An IP subnet.
+  confidence: medium
+  attributes: [reputation]
+
+- name: padns_record
+  description: A passive-active DNS observation.
+  confidence: high
+  attributes: [record_type, query, answer, first_seen, last_seen]
+  record_types: [any, anyipv4, anyipv6, a, aaaa, cname, mx, mxhash, ns, nshash, ptr4,
+    ptr6, soa, soahash, txt, txthash]
+  source: first-party CLI padns query/answer command tree
+
+- name: whois_record
+  description: WHOIS registration data for a domain, with history.
+  confidence: high
+  source: documented explore/domain/whois endpoint and the WHOIS tab docs
+
+- name: feed
+  description: >-
+    A threat intelligence feed. Silent Push publishes IOFA feeds and customers
+    create custom feeds.
+  confidence: high
+  operations: [create, read, update, enrich, delete]
+  source: documented Feeds section
+
+- name: indicator
+  description: >-
+    An individual IOC inside a feed. Silent Push's own term of art is IOFA -
+    Indicator of Future Attack.
+  confidence: high
+  operations: [add, update, delete, tag, bulk]
+  source: documented Feed Indicators section
+
+- name: feed_tag
+  description: A tag used to categorize indicators within a feed.
+  confidence: high
+  source: documented Feed Tags section
+
+- name: export
+  description: >-
+    A generated download of feed or query data. Formats: CSV, JSON, TXT, RPZ,
+    STIX.
+  confidence: high
+  kinds: [IOFA exports, bulk data exports, archive exports, organization exports]
+  source: documented Export section and the Data Export docs
+
+- name: tlp_report
+  description: A Traffic Light Protocol threat intelligence report (Amber tier documented).
+  confidence: high
+  source: documented TLP Reports section
+
+- name: job
+  description: >-
+    An async handle for a long-running scan or query, polled by job_id.
+  confidence: high
+  identity_fields: [job_id]
+  source: https://help.silentpush.com/docs/job-id-status
+
+- name: organization
+  description: The billing and permission boundary. API keys, quota and data-source entitlements are organization-scoped.
+  confidence: high
+  attributes: [api_keys, quota, api_usage, data_source_permissions]
+  source: documented Users & Quota section
+
+- name: user
+  description: A platform user belonging to an organization.
+  confidence: high
+  attributes: [profile, 2fa, notification_preferences, query_history]
+
+- name: monitor
+  description: A saved, scheduled query that emits notifications and exports.
+  confidence: medium
+  source: Release 4.11 release notes
+
+- name: saved_query
+  description: A stored SPQL or builder query, private or shared with the organization.
+  confidence: medium
+  source: https://help.silentpush.com/docs/saving-queries
+
+relationships:
+- from: organization
+  to: user
+  type: has_many
+  confidence: high
+- from: organization
+  to: feed
+  type: has_many
+  via: organization scope
+  confidence: high
+- from: organization
+  to: export
+  type: has_many
+  confidence: high
+- from: feed
+  to: indicator
+  type: has_many
+  confidence: high
+- from: feed
+  to: feed_tag
+  type: has_many
+  confidence: high
+- from: indicator
+  to: feed_tag
+  type: has_many
+  confidence: high
+- from: indicator
+  to: domain
+  type: belongs_to
+  via: observable value
+  confidence: medium
+  note: an indicator's value is a domain, IP, hostname or URL
+- from: indicator
+  to: ip_address
+  type: belongs_to
+  via: observable value
+  confidence: medium
+- from: domain
+  to: padns_record
+  type: has_many
+  confidence: high
+- from: domain
+  to: whois_record
+  type: has_one
+  confidence: high
+- from: domain
+  to: ip_address
+  type: has_many
+  via: resolves_to
+  confidence: high
+  note: 'web_scan_result.resolves_to and origin_resolves_to are arrays of IPs'
+- from: ip_address
+  to: asn
+  type: belongs_to
+  via: asn_information.asn
+  confidence: high
+- from: ip_address
+  to: subnet
+  type: belongs_to
+  confidence: medium
+- from: domain
+  to: nameserver
+  type: has_many
+  via: NS records
+  confidence: high
+- from: nameserver
+  to: domain
+  type: has_many
+  via: get_nameserver_domains
+  confidence: high
+  note: the reverse edge is a first-class Silent Push pivot
+- from: web_scan_result
+  to: domain
+  type: belongs_to
+  via: domain
+  confidence: high
+- from: web_scan_result
+  to: ip_address
+  type: belongs_to
+  via: ip
+  confidence: high
+- from: web_scan_result
+  to: asn
+  type: has_one
+  via: asn_information
+  confidence: high
+- from: web_scan_result
+  to: feed
+  type: has_many
+  via: feeds_containing_ioc
+  confidence: high
+  note: >-
+    the scan result carries back which feeds already contain this observable -
+    the join that makes a single scan answer "is this known bad?"
+- from: job
+  to: web_scan_result
+  type: has_one
+  via: job_id
+  confidence: medium
+- from: monitor
+  to: saved_query
+  type: has_one
+  confidence: medium
+- from: monitor
+  to: export
+  type: has_many
+  confidence: medium
+- from: tlp_report
+  to: indicator
+  type: has_many
+  confidence: low
+
+id_prefixes: []
+id_prefixes_note: >-
+  Silent Push uses no prefixed opaque identifiers. Entities are keyed on the
+  natural observable itself (the domain name, the IP address, the ASN) plus
+  content hashes (datahash, html_body_sha256, favicon_murmur3, jarm). That is
+  the shape of the product: the join key IS the indicator.
+
+fingerprint_keys:
+  description: >-
+    Hash and similarity fields that function as cross-entity join keys - the
+    basis of Silent Push pivoting and of the SPQL find_by_* tools.
+  keys: [favicon_md5, favicon_murmur3, favicon2_murmur3, favicon_avg, favicon2_avg,
+    jarm, html_body_sha256, html_body_murmur3, html_body_ssdeep, body_sha256,
+    header_sha256, footer_sha256, js_sha256, js_ssdeep, ssl.SHA1, ssl.SHA256,
+    ssl.authority_key_id, ssl.subject_key_id, HHV, SHV, CHV, datahash]
+
+x-evidence:
+- url: https://help.silentpush.com/apidocs/perform-a-live-scan
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://help.silentpush.com/docs/api
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://api.silentpush.com/api/schema/
+  http_status: 401
+  fetched: '2026-08-27'
+  finding: OpenAPI gated - no component schemas available to walk

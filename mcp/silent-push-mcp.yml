@@ -1,0 +1,174 @@
+generated: '2026-08-27'
+method: probed
+status: published
+source: https://help.silentpush.com/docs/mcp-for-silent-push
+note: >-
+  Silent Push announced the MCP Server in Release 6.0 (2026-06-12) as a
+  "SaaS-hosted endpoint". The docs page publishes the capability/tool list but
+  does not print the endpoint URL. The endpoint below was established by probe,
+  not by guess-and-200: mcp.silentpush.com/mcp answers a JSON-RPC POST with a
+  bespoke MCP auth challenge ("Missing or invalid Authorization header. Use:
+  Authorization: Bearer <token>"), and the same host serves RFC 8414 OAuth 2.0
+  Authorization Server Metadata at /.well-known/oauth-authorization-server whose
+  issuer is https://mcp.silentpush.com. The host root 404s, so this is not a
+  catch-all.
+
+deployment:
+  mode: remote
+  endpoint: https://mcp.silentpush.com/mcp
+  auth: oauth
+  verified: probed
+
+server:
+  name: silent-push
+  transport: http
+  url: https://mcp.silentpush.com/mcp
+  lifecycle_stage: beta
+  announced_in: Release 6.0 (2026-06-12)
+
+authorization:
+  bearer_challenge: 'Missing or invalid Authorization header. Use: Authorization: Bearer <token>'
+  oauth_metadata: well-known/silent-push-oauth-authorization-server.json
+  issuer: https://mcp.silentpush.com
+  authorization_endpoint: https://mcp.silentpush.com/oauth/authorize
+  token_endpoint: https://mcp.silentpush.com/oauth/token
+  registration_endpoint: https://mcp.silentpush.com/oauth/register
+  grant_types: [authorization_code, refresh_token]
+  pkce: S256
+  dynamic_client_registration: true
+  scopes_supported: null
+  scopes_note: >-
+    The authorization server metadata declares no scopes_supported, so no scope
+    surface is published. scopes/ is deliberately not emitted for this provider.
+
+introspection:
+  tools_list: gated
+  http_status: 401
+  note: >-
+    POST {"jsonrpc":"2.0","id":1,"method":"tools/list"} to the endpoint returns
+    401 without a bearer token, so real inputSchema values require an
+    authenticated MCP session. The tools below are the provider-published names
+    and descriptions from the MCP docs page - names and grouping are verbatim,
+    input schemas are NOT known and are not guessed.
+
+tools_source: https://help.silentpush.com/docs/mcp-for-silent-push
+tools_schema_status: not-introspected
+
+tools:
+  - name: enrich_domain
+    category: enrichment
+    description: Enrich a domain with Silent Push threat intelligence context.
+  - name: enrich_ip
+    category: enrichment
+    description: Enrich an IP address with Silent Push threat intelligence context.
+  - name: bulk_enrich_domains
+    category: enrichment
+    description: Enrich multiple domains in one call.
+  - name: bulk_enrich_ips
+    category: enrichment
+    description: Enrich multiple IP addresses in one call.
+  - name: get_risk_score
+    category: enrichment
+    description: Full proprietary Silent Push risk scoring.
+  - name: query_forward
+    category: padns
+    description: Passive Active DNS forward lookup.
+  - name: query_backward
+    category: padns
+    description: Passive Active DNS backward lookup.
+  - name: query_reverse
+    category: padns
+    description: Passive Active DNS reverse lookup.
+  - name: find_sibling_domains
+    category: padns
+    description: Find sibling domains for an observable.
+  - name: find_cousin_domains
+    category: padns
+    description: Find cousin (lookalike) domains for an observable.
+  - name: find_self_hosted
+    category: padns
+    description: Find self-hosted infrastructure.
+  - name: get_density
+    category: padns
+    description: DNS density metric for an observable.
+  - name: get_diversity
+    category: padns
+    description: DNS diversity metric for an observable.
+  - name: get_host_diversity
+    category: padns
+    description: Host diversity metric for an observable.
+  - name: get_nameserver_domains
+    category: padns
+    description: Domains served by a nameserver.
+  - name: get_asns_for_domain
+    category: padns
+    description: ASNs associated with a domain.
+  - name: namechain_search
+    category: padns
+    description: Namechain search across passive DNS.
+  - name: search_domains
+    category: padns
+    description: Search the domain dataset.
+  - name: lookup_both
+    category: padns
+    description: Combined forward and reverse lookup.
+  - name: get_asn_reputation
+    category: reputation
+    description: Reputation score for an ASN.
+  - name: get_subnet_reputation
+    category: reputation
+    description: Reputation score for a subnet.
+  - name: get_nameserver_reputation
+    category: reputation
+    description: Reputation score for a nameserver.
+  - name: get_ip_reputation
+    category: reputation
+    description: Reputation score for an IP address.
+  - name: get_domain_whois
+    category: reputation
+    description: WHOIS record for a domain.
+  - name: live_scan
+    category: scanning
+    description: Perform an on-demand live scan of a URL.
+  - name: screenshot_url
+    category: scanning
+    description: Capture an on-demand screenshot of a URL.
+  - name: query_spql
+    category: spql
+    description: Run a Silent Push Query Language (SPQL) query.
+  - name: find_by_favicon
+    category: spql
+    description: Fingerprint search by favicon hash.
+  - name: find_by_ssl_certificate
+    category: spql
+    description: Fingerprint search by SSL certificate.
+  - name: find_by_jarm
+    category: spql
+    description: Fingerprint search by JARM hash.
+  - name: find_by_html_pattern
+    category: spql
+    description: Fingerprint search by HTML pattern.
+  - name: find_by_banner
+    category: spql
+    description: Fingerprint search by service banner.
+  - name: search_by_asn
+    category: spql
+    description: Search infrastructure by ASN.
+
+x-evidence:
+  - url: https://mcp.silentpush.com/mcp
+    method: POST tools/list
+    http_status: 401
+    body: 'Missing or invalid Authorization header. Use: Authorization: Bearer <token>'
+    fetched: '2026-08-27'
+  - url: https://mcp.silentpush.com/.well-known/oauth-authorization-server
+    http_status: 200
+    content_type: application/json
+    fetched: '2026-08-27'
+  - url: https://mcp.silentpush.com/
+    http_status: 404
+    note: host root 404s - endpoint is not a catch-all
+    fetched: '2026-08-27'
+  - url: https://help.silentpush.com/docs/mcp-for-silent-push
+    http_status: 200
+    fetched: '2026-08-27'

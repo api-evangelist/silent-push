@@ -1,0 +1,176 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://help.silentpush.com/docs/api,
+  https://help.silentpush.com/docs/security-and-api-integration,
+  https://help.silentpush.com/docs/tlp-amber-reports,
+  https://help.silentpush.com/apidocs/perform-a-live-scan, and probes of
+  https://mcp.silentpush.com/.well-known/oauth-authorization-server
+note: >-
+  The Silent Push OpenAPI is auth-gated (401 at
+  https://api.silentpush.com/api/schema/), so no conformance claim below is read
+  out of a contract. Each entry states which published document it comes from.
+
+standards:
+- id: oauth2
+  conforms: true
+  scope: mcp
+  evidence: >-
+    RFC 8414 OAuth 2.0 Authorization Server Metadata served at
+    https://mcp.silentpush.com/.well-known/oauth-authorization-server (200,
+    probed 2026-08-27): authorization_code + refresh_token grants, code response
+    type, client_secret_post token auth.
+- id: oauth2-pkce
+  conforms: true
+  scope: mcp
+  evidence: 'code_challenge_methods_supported: ["S256"] in the AS metadata'
+- id: rfc8414-as-metadata
+  conforms: true
+  scope: mcp
+  evidence: the metadata document itself, served at the canonical well-known path
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  scope: mcp
+  evidence: 'registration_endpoint: https://mcp.silentpush.com/oauth/register declared in the AS metadata'
+- id: mcp
+  conforms: true
+  scope: mcp
+  evidence: >-
+    JSON-RPC 2.0 MCP endpoint at https://mcp.silentpush.com/mcp; announced as a
+    Model Context Protocol server in Release 6.0 (2026-06-12). Protocol version
+    not confirmable without credentials.
+- id: oidc
+  conforms: false
+  evidence: no /.well-known/openid-configuration served on any host
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    errors are application/json with a vendor {"errors":[{"message","code"}]}
+    envelope, not application/problem+json. Observed live on 401 and 403
+    responses 2026-08-27.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: >-
+    no /.well-known/security.txt on any host, although a vulnerability
+    disclosure policy is published as HTML at
+    https://www.silentpush.com/responsible-disclosure/
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: no Sunset or Deprecation header documented or observed
+- id: a2a
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json 404 on every Silent
+    Push host
+- id: asyncapi
+  conforms: false
+  evidence: >-
+    no AsyncAPI document and no developer-facing webhook catalog. Notifications
+    are delivered to humans via in-app, email, Slack and Microsoft Teams, not to
+    a subscriber endpoint.
+- id: json-api
+  conforms: false
+  evidence: plain JSON responses; no JSON:API media type or envelope
+- id: odata
+  conforms: false
+- id: scim
+  conforms: false
+- id: fapi
+  conforms: false
+- id: pagination-standard
+  conforms: false
+  evidence: >-
+    limit-only pagination with no offset, cursor or next-link. See
+    conventions/silent-push-conventions.yml.
+- id: idempotency
+  conforms: false
+  evidence: >-
+    no Idempotency-Key support documented. See
+    conventions/silent-push-conventions.yml.
+
+domain_standards:
+  market: threat intelligence / cyber defense
+  contract_declared: unknown
+  contract_declared_note: >-
+    REWARD-ONLY CHECK, HONESTLY UNRESOLVED. domain_standard_conformance reads
+    the contract for a domain-standard signature. Silent Push's contract is
+    auth-gated, so whether the OpenAPI itself declares a STIX media type, a
+    TAXII path or an RPZ response shape could not be observed. The signals below
+    are documentation-level claims, recorded as such - they are NOT asserted as
+    contract signatures.
+  signals:
+  - id: stix
+    name: STIX (Structured Threat Information Expression)
+    body: OASIS CTI
+    claimed: true
+    where: documentation
+    evidence: >-
+      "Export - Endpoints for downloading generated exports in various formats
+      (CSV, JSON, TXT, RPZ, STIX, etc.)" - https://help.silentpush.com/docs/api
+    version_stated: false
+    note: >-
+      STIX version (2.0 / 2.1) is not stated, so a consumer cannot tell which
+      bundle shape they will receive without an account.
+  - id: rpz
+    name: DNS Response Policy Zones
+    body: IETF (draft-vixie-dnsop-dns-rpz)
+    claimed: true
+    where: documentation
+    evidence: same Export format list on https://help.silentpush.com/docs/api
+    note: >-
+      RPZ output is the interchange format that lets a Silent Push feed be
+      loaded straight into a recursive resolver as a DNS firewall, with no
+      bespoke connector.
+  - id: tlp
+    name: Traffic Light Protocol
+    body: FIRST.org
+    claimed: true
+    where: documentation
+    evidence: >-
+      TLP Amber Reports are a first-class product surface with their own API
+      section and docs page
+      (https://help.silentpush.com/docs/tlp-amber-reports)
+    note: >-
+      TLP version (1.0 / 2.0) is not stated. Used as a handling-designation
+      vocabulary, not as a wire format.
+  - id: taxii
+    name: TAXII
+    body: OASIS CTI
+    claimed: false
+    evidence: >-
+      No TAXII server, collection or discovery endpoint is mentioned anywhere in
+      the public documentation. This is the most notable absence for this market
+      - a threat-intel provider emitting STIX without a TAXII endpoint still
+      requires a bespoke pull integration.
+  - id: misp
+    name: MISP
+    claimed: false
+    evidence: no MISP feed or module documented
+  - id: openc2
+    name: OpenC2
+    claimed: false
+  - id: stix-patterning
+    name: STIX Patterning
+    claimed: false
+    note: Silent Push ships its own query language (SPQL) instead.
+
+compliance_programs:
+  published: false
+  certifications: []
+  note: >-
+    No SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP or GDPR certification is
+    claimed on any Silent Push page. The Terms of Use and Privacy Policy were
+    keyword-scanned and carry none. NO `Compliance` pointer is emitted - see
+    security/silent-push-trust-center.yml.
+
+x-evidence:
+- url: https://mcp.silentpush.com/.well-known/oauth-authorization-server
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://help.silentpush.com/docs/api
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://api.silentpush.com/api/v2/live-scan/scan-on-demand/query/?url=https://example.com
+  http_status: 401
+  fetched: '2026-08-27'
+  finding: vendor error envelope, not RFC 9457

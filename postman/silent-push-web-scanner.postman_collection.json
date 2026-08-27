@@ -1,0 +1,585 @@
+{
+	"info": {
+		"_postman_id": "9bd9be33-d707-43c4-922e-7693fb1e7140",
+		"name": "Silent Push Web Scanner Quick Help Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2498856"
+	},
+	"item": [
+		{
+			"name": "IPs with web servers using PayPal's favicon that are not on PayPal's domain",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{SP_API_KEY}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"query\": \"favicon_murmur3 = 309020573 AND domain != \\\"paypal.com\\\"\",\"sort\":[\"scan_date/desc\"]}"
+				},
+				"url": {
+					"raw": "https://api.silentpush.com/api/v2/web-scan/query/?limit=100&with_metadata=1&max_wait=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"silentpush",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"web-scan",
+						"query",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "100"
+						},
+						{
+							"key": "with_metadata",
+							"value": "1"
+						},
+						{
+							"key": "max_wait",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IPS w/ SSL certificates expiring within the next day",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{SP_API_KEY}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"query\": \"ssl.not_after > now AND ssl.not_after < now+1d\",\"sort\":[\"scan_date/desc\"]}"
+				},
+				"url": {
+					"raw": "https://api.silentpush.com/api/v2/web-scan/query/?limit=100&with_metadata=1&max_wait=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"silentpush",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"web-scan",
+						"query",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "100"
+						},
+						{
+							"key": "with_metadata",
+							"value": "1"
+						},
+						{
+							"key": "max_wait",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IPs hosted in Japan scanned in the last 7 days",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{SP_API_KEY}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"query\": \"scan_date > now-7d AND tld = jp\",\"sort\":[\"scan_date/desc\"]}"
+				},
+				"url": {
+					"raw": "https://api.silentpush.com/api/v2/web-scan/query/?limit=100&with_metadata=1&max_wait=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"silentpush",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"web-scan",
+						"query",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "100"
+						},
+						{
+							"key": "with_metadata",
+							"value": "1"
+						},
+						{
+							"key": "max_wait",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IPs with domains containing the string walmart",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{SP_API_KEY}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"query\": \"domain = \\\"*walmart*\\\"\",\"sort\":[\"scan_date/desc\"]}"
+				},
+				"url": {
+					"raw": "https://api.silentpush.com/api/v2/web-scan/query/?limit=100&with_metadata=1&max_wait=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"silentpush",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"web-scan",
+						"query",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "100"
+						},
+						{
+							"key": "with_metadata",
+							"value": "1"
+						},
+						{
+							"key": "max_wait",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IPs using AkamaiGHost CDN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{SP_API_KEY}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"query\": \"header.server = \\\"AkamaiGHost\\\"\",\"sort\":[\"scan_date/desc\"]}"
+				},
+				"url": {
+					"raw": "https://api.silentpush.com/api/v2/web-scan/query/?limit=100&with_metadata=1&max_wait=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"silentpush",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"web-scan",
+						"query",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "100"
+						},
+						{
+							"key": "with_metadata",
+							"value": "1"
+						},
+						{
+							"key": "max_wait",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vulnerable Servers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{SP_API_KEY}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"query\": \"htmltitle = \\\"DDoS* not configured\\\" AND response > 200 AND header.server = \\\"ddos*\\\"\",\"sort\":[\"scan_date/desc\"]}"
+				},
+				"url": {
+					"raw": "https://api.silentpush.com/api/v2/web-scan/query/?limit=100&with_metadata=1&max_wait=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"silentpush",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"web-scan",
+						"query",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "100"
+						},
+						{
+							"key": "with_metadata",
+							"value": "1"
+						},
+						{
+							"key": "max_wait",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Brand Whois Example",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{SP_API_KEY}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"query\": \"datasource = \\\"whois\\\" AND domain = \\\"*crowdstrike*\\\" AND organization = \\\"CrowdStrike, Inc.\\\"\",\"sort\":[\"scan_date/desc\"]}"
+				},
+				"url": {
+					"raw": "https://api.silentpush.com/api/v2/web-scan/query/?limit=100&with_metadata=1&max_wait=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"silentpush",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"web-scan",
+						"query",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "100"
+						},
+						{
+							"key": "with_metadata",
+							"value": "1"
+						},
+						{
+							"key": "max_wait",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SP_API_KEY",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

@@ -1,0 +1,132 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://help.silentpush.com/docs/get-started-with-api,
+  https://help.silentpush.com/docs/security-and-api-integration,
+  https://help.silentpush.com/apidocs/perform-a-live-scan, and probes of
+  https://mcp.silentpush.com/.well-known/oauth-authorization-server
+note: >-
+  Derived-from-spec was not possible: the Silent Push OpenAPI at
+  https://api.silentpush.com/api/schema/ returns 401 (content-type
+  application/vnd.oai.openapi), so securitySchemes could not be read. This
+  profile is built from the published documentation and from live probes of the
+  MCP authorization surface instead.
+
+schemes:
+- id: ApiKeyAuth
+  surface: rest
+  type: apiKey
+  in: header
+  name: x-api-key
+  header_casing_note: >-
+    the Get Started guide writes the header as X-API-KEY and the API reference
+    page as x-api-key; HTTP header names are case-insensitive so both work.
+  description: >-
+    Organization-scoped API key. Every Silent Push REST endpoint requires one.
+  issuance:
+    self_service: true
+    ui_path: 'user icon > Organization > API Keys > +Add New API Key'
+    role_required: Organizational Admin
+    fields: [nickname, expiration date]
+    rotation: keys can be copied, edited or deleted from the API Keys table
+    expiry: user-set expiration date at creation time
+  docs: https://help.silentpush.com/docs/security-and-api-integration
+  evidence: 'API reference declares "SecurityAPI Key: ApiKeyAuthHeader parameter name x-api-key"'
+
+- id: ThreatCheckKey
+  surface: rest
+  type: apiKey
+  in: header
+  name: x-api-key
+  description: >-
+    A separate, organization-specific access key for the Threat Check API, found
+    under user icon > Subscription rather than under Organization > API Keys.
+    Threat Check calls do not consume usage credits and are unmetered for
+    Enterprise customers.
+  docs: https://help.silentpush.com/docs/security-and-api-integration
+  note: >-
+    Threat Check also supports DNS-based lookups as an alternative to HTTP,
+    intended for high-volume filtering. That path is not API-key authenticated
+    in the same way; the docs do not detail its authorization model.
+
+- id: McpBearer
+  surface: mcp
+  type: http
+  scheme: bearer
+  description: >-
+    The hosted MCP server accepts a bearer token in the Authorization header.
+  evidence: >-
+    POST https://mcp.silentpush.com/mcp without credentials returns 401 with
+    body 'Missing or invalid Authorization header. Use: Authorization: Bearer
+    <token>' (probed 2026-08-27)
+
+- id: McpOAuth
+  surface: mcp
+  type: oauth2
+  description: >-
+    The MCP server publishes RFC 8414 OAuth 2.0 Authorization Server Metadata,
+    so MCP clients can complete an OAuth 2.1 authorization-code flow rather than
+    pasting a static token.
+  flows:
+    authorization_code:
+      authorization_url: https://mcp.silentpush.com/oauth/authorize
+      token_url: https://mcp.silentpush.com/oauth/token
+      pkce: S256
+      pkce_required: true
+      scopes: {}
+  registration_endpoint: https://mcp.silentpush.com/oauth/register
+  dynamic_client_registration: true
+  grant_types: [authorization_code, refresh_token]
+  token_endpoint_auth_methods: [client_secret_post]
+  response_types: [code]
+  metadata_document: well-known/silent-push-oauth-authorization-server.json
+  evidence: >-
+    GET https://mcp.silentpush.com/.well-known/oauth-authorization-server -> 200
+    application/json (probed 2026-08-27)
+
+- id: SilentPushApiKeyEnv
+  surface: cli
+  type: apiKey
+  in: environment
+  name: SILENT_PUSH_API_KEY
+  description: >-
+    The first-party CLI reads the same organization API key from an environment
+    variable.
+  docs: https://github.com/Silent-Push/SP---CLI
+
+account_security:
+  two_factor:
+    supported: true
+    method: TOTP authenticator app
+    recovery_codes: true
+    ui_path: 'user icon > Account Settings > Set Up Two Factor Authentication'
+    docs: https://help.silentpush.com/docs/security-and-api-integration
+  sso:
+    documented: false
+
+scopes:
+  published: false
+  note: >-
+    No scope surface exists. The REST API is authorized by a single
+    organization-wide key with no per-scope subdivision, and the MCP
+    authorization server metadata declares no scopes_supported. scopes/ is
+    deliberately not emitted rather than filled with an empty artifact.
+
+x-evidence:
+- url: https://help.silentpush.com/docs/get-started-with-api
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://help.silentpush.com/docs/security-and-api-integration
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://help.silentpush.com/apidocs/perform-a-live-scan
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://mcp.silentpush.com/.well-known/oauth-authorization-server
+  http_status: 200
+  fetched: '2026-08-27'
+- url: https://api.silentpush.com/api/schema/
+  http_status: 401
+  content_type: application/vnd.oai.openapi
+  fetched: '2026-08-27'
+  finding: OpenAPI exists but is auth-gated
