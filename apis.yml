@@ -13,6 +13,17 @@ description: >-
   formats, authenticated with an x-api-key header. Silent Push also runs a hosted
   Model Context Protocol server that exposes 33 read-only investigation tools to
   MCP-compatible AI clients over OAuth 2.1.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.silentpush.com/wp-content/uploads/Silent-Push-Logo-@2x.png
 url: https://raw.githubusercontent.com/api-evangelist/silent-push/refs/heads/main/apis.yml
 x-type: company
