@@ -42,6 +42,18 @@ tags:
 - Enrichment
 - Threat Feeds
 - WHOIS
+- MCP
+tags_raw:
+- Company
+- Security
+- Threat Intelligence
+- Cybersecurity
+- DNS
+- Domain Intelligence
+- Passive DNS
+- Enrichment
+- Threat Feeds
+- WHOIS
 - Model Context Protocol
 maintainers:
 - FN: Kin Lane
@@ -91,6 +103,10 @@ apis:
   humanURL: https://help.silentpush.com/docs/mcp-for-silent-push
   baseURL: https://mcp.silentpush.com/mcp
   tags:
+  - MCP
+  - Agents
+  - Threat Intelligence
+  tags_raw:
   - Model Context Protocol
   - Agents
   - Threat Intelligence

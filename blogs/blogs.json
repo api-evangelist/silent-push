@@ -1,0 +1,14 @@
+{
+  "repo": "silent-push",
+  "feeds": [
+    {
+      "source": "https://www.silentpush.com/contact/",
+      "feed_url": "https://www.silentpush.com/feed/",
+      "title": "",
+      "saved": 2,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 2,
+  "fetched": "2026-08-30T22:33:40Z"
+}
