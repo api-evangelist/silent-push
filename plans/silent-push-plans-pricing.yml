@@ -92,3 +92,23 @@ x-evidence:
 - url: https://www.silentpush.com/book-a-demo/
   http_status: 200
   fetched: '2026-08-27'
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - metered
+  units: []
+  plans:
+  - name: Community Edition
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise
+    access: other
+    model: metered
+    model_how: derived
+    units: []
+    periods: []
