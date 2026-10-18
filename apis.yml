@@ -54,7 +54,7 @@ tags:
 - DNS
 - Domain Intelligence
 - Passive DNS
-- Enrichment
+- Data Enrichment
 - Threat Feeds
 - WHOIS
 - MCP
@@ -86,6 +86,11 @@ apis:
   humanURL: https://help.silentpush.com/docs/api
   baseURL: https://api.silentpush.com/api/v1/merge-api/
   tags:
+  - Threat Intelligence
+  - Data Enrichment
+  - Passive DNS
+  - Security
+  tags_raw:
   - Threat Intelligence
   - Enrichment
   - Passive DNS
